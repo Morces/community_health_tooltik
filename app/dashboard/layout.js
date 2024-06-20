@@ -39,11 +39,9 @@ export default function Dashboard({ children }) {
             style={{
               background: "linear-gradient(180deg, #f0f2fd 0%, #fff8f9 100%)",
             }}
-            className="flex flex-col h-screen overflow-y-hidden"
+            className="flex flex-col h-full overflow-y-hidden"
           >
-            <div className="ml-24">
-              <div className="mb-4">{children}</div>
-            </div>
+            <div className="ml-24 mb-4 mt-24  max-md:ml-4">{children}</div>
           </main>
         </div>
       </div>
