@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,119 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model households {
+  id                  BigInt              @id @default(autoincrement())
+  household_head_name String              @db.VarChar(500)
+  description         String?
+  location            String?             @db.VarChar(500)
+  total_members       Int?
+  created_at          DateTime?           @default(now()) @db.Timestamp(6)
+  updated_at          DateTime?           @default(now()) @db.Timestamp(6)
+  househole_members   househole_members[]
+}
+
+model househole_members {
+  id              BigInt            @id @default(autoincrement())
+  household_id    BigInt
+  name            String            @db.VarChar(500)
+  age             Int?
+  relationship    String?           @db.VarChar(500)
+  created_at      DateTime?         @default(now()) @db.Timestamp(6)
+  updated_at      DateTime?         @default(now()) @db.Timestamp(6)
+  households      households        @relation(fields: [household_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  patient_records patient_records[]
+}
+
+model members {
+  id                                BigInt    @id @default(autoincrement())
+  name                              String    @db.VarChar(500)
+  bio                               String?
+  role_id                           BigInt
+  specialization                    String?   @db.VarChar(500)
+  password                          String    @db.VarChar(500)
+  created_at                        DateTime? @default(now()) @db.Timestamp(6)
+  updated_at                        DateTime? @default(now()) @db.Timestamp(6)
+  roles                             roles     @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tasks_tasks_allocated_byTomembers tasks[]   @relation("tasks_allocated_byTomembers")
+  tasks_tasks_allocated_toTomembers tasks[]   @relation("tasks_allocated_toTomembers")
+}
+
+model patient_records {
+  id                  BigInt            @id @default(autoincrement())
+  househole_member_id BigInt
+  vitals              Json?             @db.Json
+  diagnosis           Json?             @db.Json
+  allergies           Json?             @db.Json
+  created_at          DateTime?         @default(now()) @db.Timestamp(6)
+  updated_at          DateTime?         @default(now()) @db.Timestamp(6)
+  househole_members   househole_members @relation(fields: [househole_member_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  visits              visits[]
+}
+
+model resources {
+  id            BigInt    @id @default(autoincrement())
+  name          String?   @db.VarChar(500)
+  description   String?
+  url           String?   @db.VarChar(500)
+  resource_type String    @db.VarChar(500)
+  created_at    DateTime? @default(now()) @db.Timestamp(6)
+  updated_at    DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model roles {
+  id          BigInt    @id @default(autoincrement())
+  name        String    @db.VarChar(500)
+  description String?
+  screen      Json?     @db.Json
+  features    Json?     @db.Json
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @default(now()) @db.Timestamp(6)
+  members     members[]
+}
+
+model task_status {
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(500)
+  description String?
+  tasks       tasks[]
+}
+
+model tasks {
+  id                                  BigInt       @id @default(autoincrement())
+  name                                String       @db.VarChar(500)
+  description                         String?
+  allocated_to                        BigInt?
+  allocated_by                        BigInt?
+  allocation_period_from              DateTime?    @default(now()) @db.Timestamp(6)
+  allocation_period_to                DateTime?    @db.Timestamp(6)
+  allocation_area                     String?      @db.VarChar(500)
+  task_status_id                      Int?
+  created_at                          DateTime?    @default(now()) @db.Timestamp(6)
+  updated_at                          DateTime?    @default(now()) @db.Timestamp(6)
+  members_tasks_allocated_byTomembers members?     @relation("tasks_allocated_byTomembers", fields: [allocated_by], references: [id], onUpdate: NoAction)
+  members_tasks_allocated_toTomembers members?     @relation("tasks_allocated_toTomembers", fields: [allocated_to], references: [id], onUpdate: NoAction)
+  task_status                         task_status? @relation(fields: [task_status_id], references: [id], onUpdate: NoAction)
+  visits                              visits[]
+}
+
+model visit_type {
+  id          BigInt   @id @default(autoincrement())
+  name        String   @db.VarChar(500)
+  description String?
+  visits      visits[]
+}
+
+model visits {
+  id                BigInt           @id @default(autoincrement())
+  task_id           BigInt
+  patient_record_id BigInt?
+  comment           String?
+  created_at        DateTime?        @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?        @default(now()) @db.Timestamp(6)
+  visit_type_id     BigInt
+  patient_records   patient_records? @relation(fields: [patient_record_id], references: [id], onUpdate: NoAction)
+  tasks             tasks            @relation(fields: [task_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  visit_type        visit_type       @relation(fields: [visit_type_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
