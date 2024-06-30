@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession, SessionProvider } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -7,6 +8,8 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [timeOfDay, setTimeOfDay] = useState("Morning");
   const [name, setName] = useState("Kazungu!");
+
+  const { data: session } = useSession();
 
   useEffect(() => {
     const getCurrentTimeOfDay = () => {
@@ -25,11 +28,16 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen w-full mt-5 flex-col items-center p-24">
-      <h2 className="font-medium text-3xl">{`Good ${timeOfDay}, ${name}`}</h2>
-      <p className="mt-2">
-        Don't wait until it's too late! Complete you tasks in time 😊
-      </p>
-    </main>
+    <>
+      <main className="flex min-h-screen w-full mt-5 flex-col items-center p-24">
+        <h2 className="font-medium text-3xl">{`Good ${timeOfDay}, ${
+          session?.user?.name || name
+        }`}</h2>
+
+        <p className="mt-2">
+          Don't wait until it's too late! Complete you tasks in time 😊
+        </p>
+      </main>
+    </>
   );
 }

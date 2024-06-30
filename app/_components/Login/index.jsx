@@ -7,9 +7,14 @@ import { Checkbox } from "@nextui-org/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HiMiniEye, HiMiniEyeSlash } from "react-icons/hi2";
+import { signIn } from "next-auth/react";
+
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 const Login = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -19,17 +24,26 @@ const Login = () => {
   const [remember, setRemember] = useState(false);
 
   async function handleSubmit() {
-    let res = await fetch("/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
+    const signInData = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false,
     });
-    if (res.ok) {
+
+    if (signInData?.error !== null) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } else {
+      toast({
+        variant: "success",
+        title: "Logging you in...",
+        description: "",
+      });
+      router.refresh();
       router.push("/dashboard");
     }
   }
@@ -94,6 +108,7 @@ const Login = () => {
               size="md"
               className="w-full"
               color="primary"
+              onPress={handleSubmit}
             >
               Login
             </Button>

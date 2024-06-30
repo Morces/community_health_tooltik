@@ -1,12 +1,11 @@
-// components/Dashboard.js
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
-import AppContext from "../_components/context/AppContext";
 import TopNav from "../_components/Sidebar/TopBar";
 import SideNav from "../_components/Sidebar/SideNav";
-import { useRouter } from "next/navigation";
+import { useSession, SessionProvider } from "next-auth/react";
+import useApp from "../_components/hooks/useApp";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,37 +13,28 @@ const poppins = Poppins({
 });
 
 export default function Dashboard({ children }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const router = useRouter();
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const { isSidebarOpen, toggleSidebar } = useApp();
+  const {session} = useSession() 
 
   return (
-    <AppContext.Provider
-      value={{
-        isSidebarOpen,
-        setIsSidebarOpen,
-        toggleSidebar,
-      }}
-    >
+    <SessionProvider>
       <div
-        className={cn("flex min-h-screen overflow-y-hidden", poppins.className)}
-      >
-        <SideNav isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="flex-grow w-full">
-          <TopNav toggleSidebar={toggleSidebar} />
-          <main
-            style={{
-              background: "linear-gradient(180deg, #f0f2fd 0%, #fff8f9 100%)",
-            }}
-            className="flex flex-col h-full overflow-y-hidden"
-          >
-            <div className="ml-24 mb-4 mt-24  max-md:ml-4">{children}</div>
-          </main>
-        </div>
+      className={cn("flex min-h-screen overflow-y-hidden", poppins.className)}
+    >
+      <SideNav isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className="flex-grow w-full">
+        <TopNav toggleSidebar={toggleSidebar} />
+        <main
+          style={{
+            background: "linear-gradient(180deg, #f0f2fd 0%, #fff8f9 100%)",
+          }}
+          className="flex flex-col h-full overflow-y-hidden"
+        >
+          <div className="ml-24 mb-4 mt-24  max-md:ml-4">{children}</div>
+        </main>
       </div>
-    </AppContext.Provider>
+    </div>
+    </SessionProvider>
+    
   );
 }

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import logo from "../../Assets/cht_logo.png";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { CgOrganisation } from "react-icons/cg";
@@ -12,12 +13,13 @@ import { GrResources } from "react-icons/gr";
 import { FaTasks } from "react-icons/fa";
 import { BsHouseHeart } from "react-icons/bs";
 import { ImProfile } from "react-icons/im";
+import { signOut } from "next-auth/react";
 
 const SideNav = ({ isOpen, toggleSidebar }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   const isActive = (href) => {
-    return router.pathname === href ? "bg-blue-100" : "";
+    return pathname === href ? "bg-sky-300 rounded-md" : "";
   };
 
   return (
@@ -40,83 +42,97 @@ const SideNav = ({ isOpen, toggleSidebar }) => {
           />
         </div>
 
-        <nav className="flex flex-col space-y-4 mt-4">
-          <a
-            href="/dashboard"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/dashboard"
-            )}`}
-          >
-            <MdOutlineDashboardCustomize className="text-lg" />
-            Dashboard
-          </a>
-          <a
-            href="/dashboard/organisations"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/dashboard/organisations"
-            )}`}
-          >
-            <CgOrganisation className="text-lg" />
-            Organisations
-          </a>
-          <a
-            href="/dashboard/users"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/dashboard/users"
-            )}`}
-          >
-            <PiUsers className="text-lg" />
-            Users
-          </a>
-          <a
-            href="/dashboard/tasks"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/dashboard/tasks"
-            )}`}
-          >
-            <FaTasks className="text-lg" />
-            Tasks
-          </a>
-          <a
-            href="/dashboard/households"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/dashboard/households"
-            )}`}
-          >
-            <BsHouseHeart className="text-lg" />
-            Households
-          </a>
-          <a
-            href="/dashboard/resources"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/dashboard/resources"
-            )}`}
-          >
-            <GrResources className="text-lg" />
-            Resources
-          </a>
-          <a
-            href="/dashboard/profile"
-            className={`flex gap-2 items-center max-md:text-lg ${isActive(
-              "/profile"
-            )}`}
-          >
-            <ImProfile className="text-lg" />
-            Profile
-          </a>
+        <nav className="flex flex-col space-y-2 mt-6">
+          <Link href="/dashboard">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard"
+              )}`}
+            >
+              <MdOutlineDashboardCustomize className="text-lg" />
+              Dashboard
+            </p>
+          </Link>
+          <Link href="/dashboard/organisations">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/organisations"
+              )}`}
+            >
+              <CgOrganisation className="text-lg" />
+              Organisations
+            </p>
+          </Link>
+          <Link href="/dashboard/users">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/users"
+              )}`}
+            >
+              <PiUsers className="text-lg" />
+              Users
+            </p>
+          </Link>
+          <Link href="/dashboard/tasks">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/tasks"
+              )}`}
+            >
+              <FaTasks className="text-lg" />
+              Tasks
+            </p>
+          </Link>
+          <Link href="/dashboard/households">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/households"
+              )}`}
+            >
+              <BsHouseHeart className="text-lg" />
+              Households
+            </p>
+          </Link>
+          <Link href="/dashboard/resources">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/resources"
+              )}`}
+            >
+              <GrResources className="text-lg" />
+              Resources
+            </p>
+          </Link>
+          <Link href="/dashboard/profile">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/profile"
+              )}`}
+            >
+              <ImProfile className="text-lg" />
+              Profile
+            </p>
+          </Link>
         </nav>
       </div>
 
-      <div className="flex p-4">
-        <a
-          href="/logout"
-          className="flex gap-2 items-center max-md:text-lg text-gray-500"
-        >
-          <span>
-            <AiOutlineLogout />
-          </span>
-          Log out
-        </a>
+      <div
+        className="flex p-4"
+        onClick={() =>
+          signOut({
+            redirect: true,
+            callbackUrl: `${window.location}`,
+          })
+        }
+      >
+        <Link href="/">
+          <p className="flex gap-2 items-center max-md:text-lg text-gray-500">
+            <span>
+              <AiOutlineLogout />
+            </span>
+            Log out
+          </p>
+        </Link>
       </div>
     </aside>
   );
