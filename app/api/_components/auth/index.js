@@ -53,30 +53,28 @@ export const authOptions = {
           return null;
         }
 
-        return { id: user.id.toString(), ...user };
+        return {
+          id: user.id.toString(),
+          email: user.email,
+          role: user.roles.name,
+          name: user.name,
+        };
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        return {
-          ...token,
-          role: user.roles.name,
-          name: user.name,
-        };
+        token.role = user.role;
+        token.name = user.name;
       }
+
       return token;
     },
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          role: token.roles.name,
-          name: token.name,
-        },
-      };
+      session.user.role = token.role;
+      session.user.name = token.name;
+      return session;
     },
   },
 };

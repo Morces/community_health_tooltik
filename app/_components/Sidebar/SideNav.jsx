@@ -121,7 +121,7 @@ const SideNav = ({ isOpen, toggleSidebar }) => {
         onClick={() =>
           signOut({
             redirect: true,
-            callbackUrl: `${window.location}`,
+            callbackUrl: `/`,
           })
         }
       >

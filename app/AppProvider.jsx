@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import AppContext from "./_components/context/AppContext";
+import { SessionProvider } from "next-auth/react";
 
 export function AppProvider({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,5 +30,9 @@ export function AppProvider({ children }) {
     [isSidebarOpen, errorModal, errorMessage, token, device]
   );
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <SessionProvider>
+      <AppContext.Provider value={value}>{children}</AppContext.Provider>
+    </SessionProvider>
+  );
 }
