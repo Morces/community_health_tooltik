@@ -6,11 +6,8 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-  SortingState,
-  getSortedRowModel
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 import {
   Table,
@@ -22,21 +19,11 @@ import {
 } from "@/components/ui/table";
 
 export function DataTable({ columns, data }) {
-  const [sorting, setSorting] = useState([]);
-
-  console.log("Columns:", columns); // Debugging
-  console.log("Data:", data); // Debugging
-
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    state: {
-      sorting,
-    },
   });
 
   return (
@@ -46,18 +33,16 @@ export function DataTable({ columns, data }) {
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
