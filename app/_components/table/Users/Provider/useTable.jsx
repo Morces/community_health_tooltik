@@ -67,7 +67,7 @@ export default function useTable() {
     try {
       const res = await axios.get("/api/roles");
       const { data } = res;
-      setRoles(data?.roles || []);
+      setRoles(data?.docs || []);
     } catch (error) {
       console.error("Error fetching roles:", error);
     }

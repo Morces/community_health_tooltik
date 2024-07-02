@@ -4,17 +4,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Button } from "@nextui-org/react";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
@@ -22,6 +17,9 @@ const page = () => {
   const [password, setPassword] = useState("");
   const [role_id, setRoleId] = useState("");
   const [roles, setRoles] = useState([]);
+
+  const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     getRoles();
@@ -31,16 +29,45 @@ const page = () => {
     try {
       const res = await axios.get("/api/roles");
       const { data } = res;
-      setRoles(data?.roles || []);
+      setRoles(data?.docs || []);
     } catch (error) {
       console.error("Error fetching roles:", error);
+    }
+  }
+
+  async function handleSubmit() {
+    try {
+      const res = await axios.post("/api/users/add", {
+        name,
+        email,
+        bio,
+        specialization,
+        password,
+        role_id: parseInt(role_id),
+      });
+
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "User has been added successfully.",
+      });
+
+      router.push("/dashboard/users");
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
     }
   }
 
   return (
     <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
       <div className="flex flex-col space-y-6 rounded-lg shadow-2xl bg-white p-5 w-[85%] m-auto max-md:w-[95%]">
-        <h3 className="text-center font-semibold text-xl">Add Memeber</h3>
+        <h3 className="text-center font-semibold text-xl">Add Member</h3>
 
         <div className="flex gap-5 max-md:flex-wrap max-md:w-full">
           <Input
@@ -83,20 +110,23 @@ const page = () => {
           />
         </div>
         <div className="">
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select a fruit" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="apple">Apple</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-                <SelectItem value="blueberry">Blueberry</SelectItem>
-                <SelectItem value="grapes">Grapes</SelectItem>
-                <SelectItem value="pineapple">Pineapple</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <p className="font-normal text-md">Select a role</p>
+          <select
+            name="role_id"
+            value={role_id}
+            onChange={(e) => setRoleId(e.target.value)}
+            id=""
+            className="w-full p-2 rounded-lg border shadow-sm"
+          >
+            <option disabled value="">
+              Select role
+            </option>
+            {roles?.map((role, i) => (
+              <option value={role?.id} key={i}>
+                {role?.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="">
           <Textarea
@@ -104,12 +134,24 @@ const page = () => {
             labelPlacement="outside"
             placeholder="Enter your description"
             value={bio}
-            onValueChange={(e) => setBio(e.target.value)}
+            variant="bordered"
+            onChange={(e) => setBio(e.target.value)}
           />
+        </div>
+        <div className="mt-2 w-full flex items-center justify-center">
+          <Button
+            variant="solid"
+            size="md"
+            className="w-full"
+            color="primary"
+            onPress={handleSubmit}
+          >
+            Add Member
+          </Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;
