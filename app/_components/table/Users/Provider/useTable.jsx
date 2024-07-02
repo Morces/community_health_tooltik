@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const initDoc = [{}, {}, {}, {}, {}];
+const initDoc = [{}, {}, {}];
 
 export default function useTable() {
   const [limit, setLimit] = useState(10);

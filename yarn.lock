@@ -619,7 +619,7 @@
 
 "@nextui-org/input@^2.2.2":
   version "2.2.2"
-  resolved "https://registry.npmjs.org/@nextui-org/input/-/input-2.2.2.tgz"
+  resolved "https://registry.npmjs.org/@nextui-org/input/-/input-2.2.2.tgz#db5d4bac963a9e5f53403254570ddbefd262a0c9"
   integrity sha512-mCcFsObJdlCWMuSutKTRniFIDX5+z4BAAtt/XI1uzOtUO6WXgT97BwVzMihC1l14WQsw9TCwFKAl8JWdolkNCA==
   dependencies:
     "@nextui-org/react-utils" "2.0.14"

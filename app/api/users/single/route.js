@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../_components/prisma";
-import { convertBigIntToString } from "../../_components/util/convertBigint";
 
 export async function GET(request) {
   try {
-    const { pathname } = new URL(request.url);
-    const id = pathname.split("/").pop();
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
 
     const user = await prisma.members.findUnique({
       where: { id: parseInt(id) },
@@ -15,17 +14,14 @@ export async function GET(request) {
     });
 
     if (!user) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json({ message: "User not found" }, { status: 400 });
     }
 
-    const result = convertBigIntToString(user);
-
-    return NextResponse.json({ user: result }, { status: 200 });
+    return NextResponse.json({ user }, { status: 200 });
   } catch (error) {
-    console.error(error);
     return NextResponse.json(
       { error: "Something went wrong!" },
-      { status: 500 }
+      { status: 400 }
     );
   }
 }

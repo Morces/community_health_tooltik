@@ -23,7 +23,7 @@ function TA(props) {
 
   return (
     <td>
-      <div className=" flex items-center gap-x-2 relative ">
+      <div className="flex items-center gap-x-2 relative ">
         <span
           className=" hover:text-primary active:opacity-50 text-xl cursor-pointer"
           onClick={handleOpenOption}
@@ -72,7 +72,7 @@ function DropDown(props) {
 
   return (
     <ul
-      className="absolute  bg-white shadow-md w-full p-2  z-50 "
+      className="absolute  bg-white shadow-md w-fit p-2  z-50 "
       style={{ top: "110%" }}
     >
       {React.Children.map(children, (child, index) => {

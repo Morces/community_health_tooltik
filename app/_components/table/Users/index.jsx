@@ -55,7 +55,7 @@ export default function Members() {
         setIsLoading={setIsLoading}
         setDocs={setDocs}
         isFiltered={isFiltered}
-        handleAdd={() => router.push("add")}
+        handleAdd={() => router.push("users/add")}
         setIsFiltered={setIsFiltered}
         handleRemoveFilters={clearFilters}
         pagination={pagination}
