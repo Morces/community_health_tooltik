@@ -1,25 +1,13 @@
 import React from "react";
-import { DataTable } from "./data-table";
-import { columns } from "./columns";
+import UserTable from "../../_components/table/Users";
+import Summary from "./components/Summary";
 
-const page = async () => {
-  async function getData() {
-    return [
-      {
-        id: "728ed52f",
-        amount: 100,
-        status: "pending",
-        email: "m@example.com",
-      },
-    ];
-  }
-
-  const data = await getData();
-
+const page = () => {
   return (
-    <div className="px-18 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0 max-md:p-4">
-      <div className="container  py-10">
-        <DataTable columns={columns} data={data} />
+    <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
+      <Summary />
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <UserTable />
       </div>
     </div>
   );

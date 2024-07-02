@@ -8,6 +8,8 @@ import SideNav from "../_components/Sidebar/SideNav";
 import useApp from "../_components/hooks/useApp";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Lottie from "lottie-react";
+import beatAnmimation from "../_components/table/utils/loading.json";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,7 +22,13 @@ export default function Dashboard({ children }) {
   const router = useRouter();
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div className="" style={{ width: "7em" }}>
+          <Lottie animationData={beatAnmimation} />
+        </div>
+      </div>
+    );
   }
 
   if (!session) {
