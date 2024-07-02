@@ -4,6 +4,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const page = () => {
   const [name, setName] = useState("");
@@ -64,13 +73,38 @@ const page = () => {
             placeholder="Enter Specialization"
           />
           <Input
-            type="email"
-            label="Email"
+            type="password"
+            label="Password"
             labelPlacement="outside"
             variant="bordered"
-            value={name}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter Email Address"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter Password"
+          />
+        </div>
+        <div className="">
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="apple">Apple</SelectItem>
+                <SelectItem value="banana">Banana</SelectItem>
+                <SelectItem value="blueberry">Blueberry</SelectItem>
+                <SelectItem value="grapes">Grapes</SelectItem>
+                <SelectItem value="pineapple">Pineapple</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="">
+          <Textarea
+            label="Description"
+            labelPlacement="outside"
+            placeholder="Enter your description"
+            value={bio}
+            onValueChange={(e) => setBio(e.target.value)}
           />
         </div>
       </div>
