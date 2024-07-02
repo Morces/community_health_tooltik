@@ -9,6 +9,14 @@ function TableRow(props) {
   const { doc } = props;
   const router = useRouter();
 
+  const handleView = () => {
+    router.push(`/dashboard/users/${doc?.id}`);
+  };
+
+  const handleEdit = () => {
+    router.push(`/dashboard/users/${doc?.id}`);
+  };
+
   return (
     <TR>
       <TDT name="#" txt={doc?.id || "-"} />
@@ -18,16 +26,9 @@ function TableRow(props) {
       <TDT name="Role" txt={doc?.roles?.name || ""} />
 
       <TD>
-        <TA
-          name="Action"
-          handleView={() => router.push(`member-details/${doc?.id}`)}
-          id={doc?.id}
-        >
+        <TA name="Action" handleView={handleView} id={doc?.id}>
           <div className="w-full mx-auto flex items-center justify-between">
-            <p
-              className="text-center flex gap-2"
-              onClick={() => router.push(`edit/${doc?.id}`)}
-            >
+            <p className="text-center flex gap-2" onClick={handleEdit}>
               <FaRegEdit className="text-blue-500 text-xl text-center" />
               <span>Edit</span>
             </p>
