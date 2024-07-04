@@ -31,18 +31,20 @@ model househole_members {
 }
 
 model members {
-  id                                BigInt    @id @default(autoincrement())
-  name                              String    @db.VarChar(500)
+  id                                BigInt         @id @default(autoincrement())
+  name                              String         @db.VarChar(500)
   bio                               String?
   role_id                           BigInt
-  specialization                    String?   @db.VarChar(500)
-  password                          String    @db.VarChar(500)
-  created_at                        DateTime? @default(now()) @db.Timestamp(6)
-  updated_at                        DateTime? @default(now()) @db.Timestamp(6)
-  email                             String    @unique @db.VarChar(500)
-  roles                             roles     @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tasks_tasks_allocated_byTomembers tasks[]   @relation("tasks_allocated_byTomembers")
-  tasks_tasks_allocated_toTomembers tasks[]   @relation("tasks_allocated_toTomembers")
+  specialization                    String?        @db.VarChar(500)
+  password                          String         @db.VarChar(500)
+  created_at                        DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at                        DateTime?      @default(now()) @db.Timestamp(6)
+  email                             String         @unique @db.VarChar(500)
+  organisation_id                   BigInt?
+  organisations                     organisations? @relation(fields: [organisation_id], references: [id], onUpdate: NoAction)
+  roles                             roles          @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tasks_tasks_allocated_byTomembers tasks[]        @relation("tasks_allocated_byTomembers")
+  tasks_tasks_allocated_toTomembers tasks[]        @relation("tasks_allocated_toTomembers")
 }
 
 model patient_records {
@@ -69,7 +71,7 @@ model resources {
 
 model roles {
   id          BigInt    @id @default(autoincrement())
-  name        String    @db.VarChar(500) @unique
+  name        String    @unique @db.VarChar(500)
   description String?
   screen      Json?     @db.Json
   features    Json?     @db.Json
@@ -121,4 +123,15 @@ model visits {
   patient_records   patient_records? @relation(fields: [patient_record_id], references: [id], onUpdate: NoAction)
   tasks             tasks            @relation(fields: [task_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
   visit_type        visit_type       @relation(fields: [visit_type_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model organisations {
+  id          BigInt    @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  description String    @db.VarChar(255)
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @default(now()) @db.Timestamp(6)
+  phone       String?   @db.VarChar(255)
+  email       String?   @db.VarChar(255)
+  members     members[]
 }
