@@ -47,7 +47,7 @@ const Page = () => {
         name,
         description,
         screen: screens,
-        features,
+        features: features,
       });
 
       toast({
