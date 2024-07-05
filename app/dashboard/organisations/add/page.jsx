@@ -57,7 +57,7 @@ const page = () => {
   return (
     <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
       <div className="flex flex-col space-y-6 rounded-lg shadow-2xl bg-white p-5 w-[85%] m-auto max-md:w-[95%]">
-        <h3 className="text-center font-semibold text-xl">Add Member</h3>
+        <h3 className="text-center font-semibold text-xl">Add Organisation</h3>
 
         <div className="flex gap-5 max-md:flex-wrap max-md:w-full">
           <Input
@@ -67,7 +67,7 @@ const page = () => {
             variant="bordered"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter Full Name"
+            placeholder="Enter Name"
           />
           <Input
             type="email"
