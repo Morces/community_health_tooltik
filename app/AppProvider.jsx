@@ -32,7 +32,24 @@ export function AppProvider({ children }) {
 
   return (
     <SessionProvider>
-      <AppContext.Provider value={value}>{children}</AppContext.Provider>
+      <AppContext.Provider
+        value={{
+          isSidebarOpen,
+          setIsSidebarOpen,
+          errorModal,
+          setErrorModal,
+          errorMessage,
+          setErrorMessage,
+          token,
+          setToken,
+          device,
+          setDevice,
+          user,
+          setUser,
+        }}
+      >
+        {children}
+      </AppContext.Provider>
     </SessionProvider>
   );
 }

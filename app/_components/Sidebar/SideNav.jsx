@@ -13,6 +13,7 @@ import { GrResources } from "react-icons/gr";
 import { FaTasks } from "react-icons/fa";
 import { BsHouseHeart } from "react-icons/bs";
 import { ImProfile } from "react-icons/im";
+import { RiUserSharedLine } from "react-icons/ri";
 import { signOut } from "next-auth/react";
 
 const SideNav = ({ isOpen, toggleSidebar }) => {
@@ -101,6 +102,16 @@ const SideNav = ({ isOpen, toggleSidebar }) => {
             >
               <GrResources className="text-lg" />
               Resources
+            </p>
+          </Link>
+          <Link href="/dashboard/roles">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/roles"
+              )}`}
+            >
+              <RiUserSharedLine className="text-lg" />
+              Roles
             </p>
           </Link>
           <Link href="/dashboard/profile">
