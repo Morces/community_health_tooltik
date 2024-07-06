@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Textarea } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
 import { DateInput } from "@nextui-org/date-input";
-import {CalendarDate, parseDate} from "@internationalized/date";
+import { parseDate } from "@internationalized/date";
 import { Button } from "@nextui-org/react";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
@@ -17,22 +17,39 @@ const page = () => {
 
   useEffect(() => {
     getMembers();
+    getWorkers();
   }, []);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [allocatedTo, setAllocatedTo] = useState(null);
   const [allocatedBy, setAllocatedBy] = useState(null);
-  const [fromDate, setFromDate] = useState(new Date());
-  const [toDate, setToDate] = useState(new Date());
+  const [fromDate, setFromDate] = useState(parseDate("2024-04-04"));
+  const [toDate, setToDate] = useState(parseDate("2024-04-04"));
   const [allocationArea, setAllocationArea] = useState("");
   const [users, setUsers] = useState([]);
+  const [workers, setWorkers] = useState([]);
 
   async function getMembers() {
     try {
-      const res = await axios.get("/api/users");
+      const res = await axios.get("/api/users", {
+        params: {},
+      });
       const { data } = res;
       setUsers(data?.docs || []);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function getWorkers() {
+    try {
+      const res = await axios.get("/api/users", {
+        params: {
+          role: 3,
+        },
+      });
+      const { data } = res;
+      setWorkers(data?.docs || []);
     } catch (error) {
       console.error(error);
     }
@@ -42,8 +59,8 @@ const page = () => {
     try {
       const res = await axios.post("/api/tasks/add", {
         name,
-        allocation_period_from: fromDate,
-        allocation_period_to: toDate,
+        allocation_period_from: fromDate.toString(),
+        allocation_period_to: toDate.toString(),
         allocated_by: parseInt(allocatedBy),
         allocated_to: parseInt(allocatedTo),
         description,
@@ -95,20 +112,20 @@ const page = () => {
           <DateInput
             label="From"
             labelPlacement="outside"
-            value={parseDate(fromDate)}
+            value={fromDate}
             variant="bordered"
             onChange={(date) => setFromDate(date)}
           />
           <DateInput
             label="To"
             labelPlacement="outside"
-            value={parseDate(toDate)}
+            value={toDate}
             variant="bordered"
             onChange={(date) => setToDate(date)}
           />
         </div>
-        <div className="flex gap-5 max-md:flex-wrap max-md:w-full">
-          <div>
+        <div className="flex justify-between gap-5 max-md:flex-wrap max-md:w-full">
+          <div className="w-full">
             <p className="font-normal text-md">Allocated By</p>
             <select
               name="allocatedBy"
@@ -126,7 +143,7 @@ const page = () => {
               ))}
             </select>
           </div>
-          <div>
+          <div className="w-full">
             <p className="font-normal text-md">Allocated To</p>
             <select
               name="allocatedTo"
@@ -137,7 +154,7 @@ const page = () => {
               <option disabled value="">
                 Select user
               </option>
-              {users?.map((user, i) => (
+              {workers?.map((user, i) => (
                 <option value={user?.id} key={i}>
                   {user?.name}
                 </option>

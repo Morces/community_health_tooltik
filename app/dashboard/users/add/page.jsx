@@ -154,9 +154,9 @@ const Page = () => {
         </div>
         <div className="">
           <Textarea
-            label="Description"
+            label="Bio"
             labelPlacement="outside"
-            placeholder="Enter your description"
+            placeholder="Enter bio"
             value={bio}
             variant="bordered"
             onChange={(e) => setBio(e.target.value)}
