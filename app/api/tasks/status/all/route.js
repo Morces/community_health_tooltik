@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { formatOrder, inFilter } from "../_components/util/list";
-import { prisma } from "../_components/prisma";
-import { convertBigIntToString } from "../_components/util/convertBigint";
+import { formatOrder } from "@/app/api/_components/util/list";
+import { prisma } from "../../../_components/prisma";
+import { convertBigIntToString } from "@/app/api/_components/util/convertBigint";
 
 export async function GET(req) {
   try {
@@ -9,34 +9,24 @@ export async function GET(req) {
     const page = searchParams.get("page") || 1;
     const limit = searchParams.get("limit") || 10;
     const order = searchParams.get("order") || "desc";
-    const status = searchParams.get("status") || "";
 
     const whereDoc = {};
     const orderBy = formatOrder(order);
 
-    inFilter({
-      filter: status,
-      whereDoc,
-      field: "task_status_id",
-    });
-
-    const total = await prisma.tasks.count({ where: whereDoc });
+    const total = await prisma.task_status.count({ where: whereDoc });
     const pageNumber = parseInt(page);
     const pageLimit = parseInt(limit);
     const pageCount = Math.ceil(total / pageLimit);
 
     const offset = pageNumber > 1 ? pageNumber * pageLimit - pageLimit : 0;
 
-    const items = await prisma.tasks.findMany({
+    const items = await prisma.task_status.findMany({
       where: whereDoc,
       orderBy: orderBy,
       skip: offset,
       take: pageLimit,
       include: {
-        members_tasks_allocated_byTomembers: true,
-        members_tasks_allocated_toTomembers: true,
-        task_status: true,
-        visits: true,
+        tasks: true,
       },
     });
 
