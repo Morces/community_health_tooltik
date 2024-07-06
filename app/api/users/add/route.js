@@ -6,7 +6,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    const { name, email, password, role_id, bio, specialization } = body;
+    const { name, email, password, role_id, bio, specialization, phone } = body;
 
     if (!name || !email || !password || !role_id) {
       return NextResponse.json(
@@ -46,6 +46,7 @@ export async function POST(req) {
         specialization,
         role_id: parseInt(role_id),
         password: hashPass,
+        phone,
       },
     });
 
