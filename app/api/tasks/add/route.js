@@ -37,20 +37,16 @@ export async function POST(req) {
     //   return NextResponse.json({ message: "Task status not found" });
     // }
 
-    const allocationPeriodFrom = formatISO(
-      new Date(allocation_period_from).toISOString()
-    );
-    const allocationPeriodTo = formatISO(
-      new Date(allocation_period_to).toISOString()
-    );
+    const allocationPeriodFrom = new Date(allocation_period_from).toISOString();
+    const allocationPeriodTo = new Date(allocation_period_to).toISOString();
 
     const task = await prisma.tasks.create({
       data: {
         name,
         description,
         task_status_id: parseInt(1),
-        allocated_by: parseInt(allocated_by) || null,
-        allocated_to: parseInt(allocated_to) || null,
+        allocated_by: allocated_by ? parseInt(allocated_by) : null,
+        allocated_to: allocated_to ? parseInt(allocated_to) : null,
         allocation_period_from: allocation_period_from
           ? allocationPeriodFrom
           : null,
