@@ -26,7 +26,7 @@ export default function useTable() {
 
   useEffect(() => {
     getDocs({ page, limit });
-  }, [limit, selectedRoles, order]);
+  }, [limit, selectedRoles, order, page]);
 
   useEffect(() => {
     getRoles();

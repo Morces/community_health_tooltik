@@ -27,7 +27,7 @@ export function AppProvider({ children }) {
       user,
       setUser,
     }),
-    [isSidebarOpen, errorModal, errorMessage, token, device]
+    [isSidebarOpen, errorModal, errorMessage, token, device, user]
   );
 
   return (

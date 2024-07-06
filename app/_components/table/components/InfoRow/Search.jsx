@@ -15,7 +15,7 @@ export default function Search(props) {
 
   useEffect(() => {
     setSearchUrl(url);
-  }, [url]);
+  }, [url, setSearchUrl]);
 
   if (!url) {
     return null;

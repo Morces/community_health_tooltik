@@ -26,7 +26,7 @@ export default function useTable() {
 
   useEffect(() => {
     getDocs({ page, limit });
-  }, [limit, selectedStatus, order]);
+  }, [limit, selectedStatus, order, page]);
 
   useEffect(() => {
     getStatus();

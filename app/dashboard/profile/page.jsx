@@ -50,6 +50,7 @@ const page = () => {
       setBio(data?.user?.bio);
       setSpecialization(data?.user?.specialization);
       setId(data?.user?.id);
+      setPhone(data?.user?.phone);
     } catch (error) {
       console.error(error);
     }

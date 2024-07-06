@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import TableContext from "./Provider/TableContext";
 
 function TA(props) {
-  const { handleView = null, id = null, children } = props;
+  const { handleView = null, id = null } = props;
 
   const { active = null, setActive = () => {} } = useContext(TableContext);
 

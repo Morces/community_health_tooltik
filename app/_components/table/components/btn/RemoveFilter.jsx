@@ -1,3 +1,5 @@
+"use client";
+
 import Btn from "./Btn";
 
 import { MdFilterAltOff } from "react-icons/md";
@@ -8,12 +10,11 @@ import { useContext } from "react";
 
 function RemoveFilter(props) {
   const { handleRemoveFilters = () => {}, isFiltered = false } = props;
+  const { setSearch, setShowPagination } = useContext(TableContext);
 
   if (!isFiltered) {
     return null;
   }
-
-  const { setSearch, setShowPagination } = useContext(TableContext);
 
   const clearFilters = () => {
     handleRemoveFilters();

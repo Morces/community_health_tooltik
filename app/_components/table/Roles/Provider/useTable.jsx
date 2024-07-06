@@ -22,7 +22,7 @@ export default function useTable() {
 
   useEffect(() => {
     getDocs({ page, limit });
-  }, [limit, order]);
+  }, [limit, order, page]);
 
   async function getDocs({ page, limit }) {
     try {
