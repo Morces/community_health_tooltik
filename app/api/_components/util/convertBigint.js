@@ -1,14 +1,24 @@
 export function convertBigIntToString(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(convertBigIntToString);
-  } else if (typeof obj === "object" && obj !== null) {
-    return Object.entries(obj).reduce((acc, [key, value]) => {
-      acc[key] =
-        typeof value === "bigint"
-          ? value.toString()
-          : convertBigIntToString(value);
-      return acc;
-    }, {});
+  if (obj === null || obj === undefined) return obj;
+
+  if (typeof obj === "bigint") {
+    return obj.toString();
   }
+
+  if (obj instanceof Date) {
+    return obj.toISOString();
+  }
+
+  if (typeof obj === "object") {
+    if (Array.isArray(obj)) {
+      return obj.map(convertBigIntToString);
+    }
+    const result = {};
+    for (const key in obj) {
+      result[key] = convertBigIntToString(obj[key]);
+    }
+    return result;
+  }
+
   return obj;
 }

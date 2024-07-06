@@ -546,6 +546,21 @@
     "@react-types/datepicker" "3.7.2"
     "@react-types/shared" "3.22.1"
 
+"@nextui-org/date-input@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@nextui-org/date-input/-/date-input-2.1.1.tgz#54222fc44189f77339bd695a40119e709648f60b"
+  integrity sha512-fts8R058AVN8dhkBGaJ/7F68ZwM/E3Imu5uhauHoXVoJhaXNft5fA23HJYpNkFrG0k/Tk7vGcGSPistiERQuKg==
+  dependencies:
+    "@internationalized/date" "^3.5.4"
+    "@nextui-org/react-utils" "2.0.14"
+    "@nextui-org/shared-utils" "2.0.5"
+    "@react-aria/datepicker" "3.10.1"
+    "@react-aria/i18n" "3.11.1"
+    "@react-aria/utils" "3.24.1"
+    "@react-stately/datepicker" "3.9.4"
+    "@react-types/datepicker" "3.7.4"
+    "@react-types/shared" "3.23.1"
+
 "@nextui-org/date-picker@2.1.1":
   version "2.1.1"
   resolved "https://registry.npmjs.org/@nextui-org/date-picker/-/date-picker-2.1.1.tgz"
@@ -2199,6 +2214,30 @@
     "@react-types/shared" "^3.22.1"
     "@swc/helpers" "^0.5.0"
 
+"@react-aria/datepicker@3.10.1":
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/@react-aria/datepicker/-/datepicker-3.10.1.tgz#513a9d18e118d4c3d078fdbfc45dca76b7eeb37f"
+  integrity sha512-4HZL593nrNMa1GjBmWEN/OTvNS6d3/16G1YJWlqiUlv11ADulSbqBIjMmkgwrJVFcjrgqtXFy+yyrTA/oq94Zw==
+  dependencies:
+    "@internationalized/date" "^3.5.4"
+    "@internationalized/number" "^3.5.3"
+    "@internationalized/string" "^3.2.3"
+    "@react-aria/focus" "^3.17.1"
+    "@react-aria/form" "^3.0.5"
+    "@react-aria/i18n" "^3.11.1"
+    "@react-aria/interactions" "^3.21.3"
+    "@react-aria/label" "^3.7.8"
+    "@react-aria/spinbutton" "^3.6.5"
+    "@react-aria/utils" "^3.24.1"
+    "@react-stately/datepicker" "^3.9.4"
+    "@react-stately/form" "^3.0.3"
+    "@react-types/button" "^3.9.4"
+    "@react-types/calendar" "^3.4.6"
+    "@react-types/datepicker" "^3.7.4"
+    "@react-types/dialog" "^3.5.10"
+    "@react-types/shared" "^3.23.1"
+    "@swc/helpers" "^0.5.0"
+
 "@react-aria/datepicker@3.9.3":
   version "3.9.3"
   resolved "https://registry.npmjs.org/@react-aria/datepicker/-/datepicker-3.9.3.tgz"
@@ -2567,7 +2606,7 @@
     "@react-types/slider" "^3.7.1"
     "@swc/helpers" "^0.5.0"
 
-"@react-aria/spinbutton@^3.6.3":
+"@react-aria/spinbutton@^3.6.3", "@react-aria/spinbutton@^3.6.5":
   version "3.6.5"
   resolved "https://registry.npmjs.org/@react-aria/spinbutton/-/spinbutton-3.6.5.tgz"
   integrity sha512-0aACBarF/Xr/7ixzjVBTQ0NBwwwsoGkf5v6AVFVMTC0uYMXHTALvRs+ULHjHMa5e/cX/aPlEvaVT7jfSs+Xy9Q==
@@ -2827,6 +2866,20 @@
     "@react-stately/utils" "^3.9.1"
     "@react-types/datepicker" "^3.7.2"
     "@react-types/shared" "^3.22.1"
+    "@swc/helpers" "^0.5.0"
+
+"@react-stately/datepicker@3.9.4", "@react-stately/datepicker@^3.9.4":
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/@react-stately/datepicker/-/datepicker-3.9.4.tgz#c9862cdc09da72760ed3005169223c7743b44b2d"
+  integrity sha512-yBdX01jn6gq4NIVvHIqdjBUPo+WN8Bujc4OnPw+ZnfA4jI0eIgq04pfZ84cp1LVXW0IB0VaCu1AlQ/kvtZjfGA==
+  dependencies:
+    "@internationalized/date" "^3.5.4"
+    "@internationalized/string" "^3.2.3"
+    "@react-stately/form" "^3.0.3"
+    "@react-stately/overlays" "^3.6.7"
+    "@react-stately/utils" "^3.10.1"
+    "@react-types/datepicker" "^3.7.4"
+    "@react-types/shared" "^3.23.1"
     "@swc/helpers" "^0.5.0"
 
 "@react-stately/flags@^3.0.1", "@react-stately/flags@^3.0.3":
@@ -3124,6 +3177,14 @@
     "@internationalized/date" "^3.5.2"
     "@react-types/shared" "^3.22.1"
 
+"@react-types/calendar@^3.4.6":
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/@react-types/calendar/-/calendar-3.4.6.tgz#66ddcefc3058492b3cce58a6e63b01558048b669"
+  integrity sha512-WSntZPwtvsIYWvBQRAPvuCn55UTJBZroTvX0vQvWykJRQnPAI20G1hMQ3dNsnAL+gLZUYxBXn66vphmjUuSYew==
+  dependencies:
+    "@internationalized/date" "^3.5.4"
+    "@react-types/shared" "^3.23.1"
+
 "@react-types/checkbox@3.7.1", "@react-types/checkbox@^3.7.1":
   version "3.7.1"
   resolved "https://registry.npmjs.org/@react-types/checkbox/-/checkbox-3.7.1.tgz"
@@ -3154,6 +3215,16 @@
     "@react-types/calendar" "^3.4.4"
     "@react-types/overlays" "^3.8.5"
     "@react-types/shared" "^3.22.1"
+
+"@react-types/datepicker@3.7.4", "@react-types/datepicker@^3.7.4":
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/@react-types/datepicker/-/datepicker-3.7.4.tgz#8b21df1041d7e51198621984920ac290b2f09744"
+  integrity sha512-ZfvgscvNzBJpYyVWg3nstJtA/VlWLwErwSkd1ivZYam859N30w8yH+4qoYLa6FzWLCFlrsRHyvtxlEM7lUAt5A==
+  dependencies:
+    "@internationalized/date" "^3.5.4"
+    "@react-types/calendar" "^3.4.6"
+    "@react-types/overlays" "^3.8.7"
+    "@react-types/shared" "^3.23.1"
 
 "@react-types/dialog@^3.5.10", "@react-types/dialog@^3.5.8":
   version "3.5.10"
@@ -6045,16 +6116,7 @@ streamsearch@^1.1.0:
   resolved "https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz"
   integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -6125,14 +6187,7 @@ string_decoder@^1.1.1:
   dependencies:
     safe-buffer "~5.2.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==

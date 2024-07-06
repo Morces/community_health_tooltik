@@ -4,6 +4,7 @@ import { TR, TDT, TA, TD } from "../../components";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
+import { convDate2 } from "@/app/_components/util/Time";
 
 function TableRow(props) {
   const { doc } = props;
@@ -29,16 +30,16 @@ function TableRow(props) {
         name="ALLOCATED BY"
         txt={doc?.members_tasks_allocated_byTomembers?.name || ""}
       />
-      {/* <TDT
-        name="ALLOCATED PERIOD FROM"
-        txt={doc?.allocation_period_from || ""}
-      />
-      <TDT name="ALLOCATED PERIOD TO" txt={doc?.allocation_period_to || ""} /> */}
-      <TDT name="ALLOCATED AREA" txt={doc?.allocation_area || ""} />
       <TDT
-        name="TASK STATUS"
-        txt={doc?.task_status?.name || ""}
+        name="ALLOCATED PERIOD FROM"
+        txt={convDate2(doc?.allocation_period_from) || ""}
       />
+      <TDT
+        name="ALLOCATED PERIOD TO"
+        txt={convDate2(doc?.allocation_period_to) || ""}
+      />
+      <TDT name="ALLOCATED AREA" txt={doc?.allocation_area || ""} />
+      <TDT name="TASK STATUS" txt={doc?.task_status?.name || ""} />
       <TD>
         <TA name="Action" handleView={handleView} id={doc?.id}>
           <div className="w-full mx-auto flex items-center justify-between">

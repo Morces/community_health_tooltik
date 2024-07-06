@@ -14,6 +14,7 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
   const [specialization, setSpecialization] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role_id, setRoleId] = useState("");
   const [roles, setRoles] = useState([]);
@@ -53,6 +54,7 @@ const Page = () => {
         specialization,
         password,
         role_id: parseInt(role_id),
+        phone,
       });
 
       toast({
@@ -99,6 +101,18 @@ const Page = () => {
             placeholder="Enter Email Address"
           />
         </div>
+        <div className="mt-4">
+          <Input
+            type="text"
+            label="Phone"
+            labelPlacement="outside"
+            variant="bordered"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Enter Phone Number"
+          />
+        </div>
+
         <div className="flex gap-5 max-md:flex-wrap max-md:w-full">
           <Input
             type="text"

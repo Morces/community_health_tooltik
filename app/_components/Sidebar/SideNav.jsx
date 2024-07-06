@@ -14,6 +14,7 @@ import { FaTasks } from "react-icons/fa";
 import { BsHouseHeart } from "react-icons/bs";
 import { ImProfile } from "react-icons/im";
 import { RiUserSharedLine } from "react-icons/ri";
+import { LiaPeopleCarrySolid } from "react-icons/lia";
 import { signOut } from "next-auth/react";
 
 const SideNav = ({ isOpen, toggleSidebar }) => {
@@ -92,6 +93,16 @@ const SideNav = ({ isOpen, toggleSidebar }) => {
             >
               <BsHouseHeart className="text-lg" />
               Households
+            </p>
+          </Link>
+          <Link href="/dashboard/visits">
+            <p
+              className={`flex gap-2 items-center max-md:text-lg p-3 ${isActive(
+                "/dashboard/visits"
+              )}`}
+            >
+              <LiaPeopleCarrySolid className="text-lg" />
+              Visits
             </p>
           </Link>
           <Link href="/dashboard/resources">
