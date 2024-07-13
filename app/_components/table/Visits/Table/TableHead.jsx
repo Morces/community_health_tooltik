@@ -10,13 +10,10 @@ function TableHead() {
   return (
     <Thead>
       <THT txt="#" />
-      <THTS txt="Task Name" field="name" setOrder={setOrder} />
+      <THTS txt="Task Name" field="task_id" setOrder={setOrder} />
+      <THTS txt="Visit Type" field="visit_type_id" setOrder={setOrder} />
       <THTS txt="Allocated To" field="allocated_to" setOrder={setOrder} />
-      <THTS txt="Allocated By" field="allocated_by" setOrder={setOrder} />
-      <THTS txt="Allocated Period From" field="allocation_period_from" setOrder={setOrder} />
-      <THTS txt="Allocated Period To" field="allocation_period_to" setOrder={setOrder} />
-      <THTS txt="Allocated Area" field="allocation_area" setOrder={setOrder} />
-      <THTS txt="Task Status" field="task_status_id" setOrder={setOrder} />
+      <THTS txt="Comment" field="comment" setOrder={setOrder} />
       <THT txt="Actions" />
     </Thead>
   );

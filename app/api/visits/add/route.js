@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../_components/prisma";
+import { convertBigIntToString } from "../../_components/util/convertBigint";
 
 export async function POST(request) {
   try {
@@ -18,7 +19,7 @@ export async function POST(request) {
       where: { id: parseInt(visit_type_id) },
     });
 
-    if (visitType) {
+    if (!visitType) {
       return NextResponse.json(
         { message: "Visit Type not found" },
         { status: 400 }
@@ -42,8 +43,10 @@ export async function POST(request) {
       },
     });
 
+    const result = convertBigIntToString(visit);
+
     return NextResponse.json(
-      visit,
+      result,
       { message: "Visit created" },
       { status: 201 }
     );

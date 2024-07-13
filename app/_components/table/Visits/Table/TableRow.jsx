@@ -21,25 +21,13 @@ function TableRow(props) {
   return (
     <TR>
       <TDT name="#" txt={doc?.id || "-"} />
-      <TDT name="TASK NAME" txt={doc?.name || "-"} />
+      <TDT name="TASK NAME" txt={doc?.tasks?.name || "-"} />
+      <TDT name="VISIT TYPE" txt={doc?.visit_type?.name || ""} />
       <TDT
-        name="ALLOCATE TO"
-        txt={doc?.members_tasks_allocated_toTomembers?.name || ""}
+        name="ALLOCATED TO"
+        txt={doc?.tasks?.members_tasks_allocated_toTomembers?.name || ""}
       />
-      <TDT
-        name="ALLOCATED BY"
-        txt={doc?.members_tasks_allocated_byTomembers?.name || ""}
-      />
-      <TDT
-        name="ALLOCATED PERIOD FROM"
-        txt={convDate2(doc?.allocation_period_from) || ""}
-      />
-      <TDT
-        name="ALLOCATED PERIOD TO"
-        txt={convDate2(doc?.allocation_period_to) || ""}
-      />
-      <TDT name="ALLOCATED AREA" txt={doc?.allocation_area || ""} />
-      <TDT name="TASK STATUS" txt={doc?.task_status?.name || ""} />
+      <TDT name="COMMENT" txt={doc?.comment || ""} />
       <TD>
         <TA name="Action" handleView={handleView} id={doc?.id}>
           <div className="w-full mx-auto flex items-center justify-between">

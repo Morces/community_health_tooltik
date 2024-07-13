@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const initDoc = [{}, {}, {}];
+const initDoc = [];
 
 export default function useTable() {
   const [limit, setLimit] = useState(10);
@@ -41,7 +41,7 @@ export default function useTable() {
   async function getDocs({ page, limit }) {
     try {
       setIsLoading(true);
-      const res = await axios.get("/api/tasks", {
+      const res = await axios.get("/api/visits", {
         params: {
           page,
           limit,
