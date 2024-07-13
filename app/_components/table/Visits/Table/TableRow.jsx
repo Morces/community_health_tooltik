@@ -3,36 +3,43 @@
 import { TR, TDT, TA, TD } from "../../components";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { convDate2 } from "@/app/_components/util/Time";
 
 function TableRow(props) {
   const { doc } = props;
   const router = useRouter();
-  const { id } = useParams();
 
   const handleView = () => {
-    router.push(`/dashboard/households/${id}/view-member/${doc?.id}`);
+    router.push(`/dashboard/tasks/view/${doc?.id}`);
   };
 
   const handleEdit = () => {
-    router.push(`/dashboard/households/${id}/edit-member/${doc?.id}`);
+    router.push(`/dashboard/tasks/edit/${doc?.id}`);
   };
 
   return (
     <TR>
       <TDT name="#" txt={doc?.id || "-"} />
+      <TDT name="TASK NAME" txt={doc?.name || "-"} />
       <TDT
-        name="VITALS"
-        txt={`Temp: ${doc?.vitals?.temp}°C, Height: ${doc?.vitals?.height}, Weignt: ${doc?.vitals?.weight}`}
+        name="ALLOCATE TO"
+        txt={doc?.members_tasks_allocated_toTomembers?.name || ""}
       />
       <TDT
-        name="DIAGNOSIS"
-        txt={`Allergen: ${doc?.diagnosis?.allergen}, Severity: ${doc?.diagnosis?.severity}`}
+        name="ALLOCATED BY"
+        txt={doc?.members_tasks_allocated_byTomembers?.name || ""}
       />
       <TDT
-        name="ALLERGIES"
-        txt={`Condition: ${doc?.allergies?.condition}, Notes: ${doc?.allergies?.notes}`}
+        name="ALLOCATED PERIOD FROM"
+        txt={convDate2(doc?.allocation_period_from) || ""}
       />
+      <TDT
+        name="ALLOCATED PERIOD TO"
+        txt={convDate2(doc?.allocation_period_to) || ""}
+      />
+      <TDT name="ALLOCATED AREA" txt={doc?.allocation_area || ""} />
+      <TDT name="TASK STATUS" txt={doc?.task_status?.name || ""} />
       <TD>
         <TA name="Action" handleView={handleView} id={doc?.id}>
           <div className="w-full mx-auto flex items-center justify-between">
@@ -42,7 +49,7 @@ function TableRow(props) {
             </p>
           </div>
           <div
-            onClick={""}
+            onClick={() => {}}
             className="w-full mx-auto flex items-center justify-between"
           >
             <p className="text-center flex gap-2">

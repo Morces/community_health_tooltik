@@ -5,10 +5,10 @@ import useTable from "./Provider/useTable";
 import TableRow from "./Table/TableRow";
 import { Table, TBody } from "../components";
 import Filters from "./Filter";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import TableContext from "./Provider/TableContext";
 
-export default function HouseholdsMembers() {
+export default function Visits() {
   const {
     limit,
     setLimit,
@@ -19,16 +19,15 @@ export default function HouseholdsMembers() {
     isFiltered,
     setIsFiltered,
     pagination,
-    roles,
-    setRoles,
-    selectedRoles,
-    setSelectedRoles,
+    status,
+    setStatus,
+    selectedStatus,
+    setSelectedStatus,
     setOrder,
     clearFilters,
   } = useTable();
 
   const router = useRouter();
-  const { id, view } = useParams();
 
   return (
     <TableContext.Provider
@@ -42,26 +41,26 @@ export default function HouseholdsMembers() {
         isFiltered,
         setIsFiltered,
         pagination,
-        roles,
-        setRoles,
-        selectedRoles,
-        setSelectedRoles,
+        status,
+        setStatus,
+        selectedStatus,
+        setSelectedStatus,
         setOrder,
         clearFilters,
       }}
     >
       <Table
-        label="All Medical Records"
+        label="All Visits"
         isLoading={isLoading}
         setIsLoading={setIsLoading}
         setDocs={setDocs}
         isFiltered={isFiltered}
-        handleAdd={() => router.push(`/dashboard/households/${id}/view-member/${view}/add`)}
+        handleAdd={() => router.push("add")}
         setIsFiltered={setIsFiltered}
         handleRemoveFilters={clearFilters}
         pagination={pagination}
-        url="households/search"
-        // FilterComponent={<Filters />}
+        url="visits/search"
+        FilterComponent={<Filters />}
       >
         <TableHead setOrder={setOrder} />
         <TBody>

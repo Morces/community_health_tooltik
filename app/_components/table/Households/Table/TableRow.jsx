@@ -23,7 +23,7 @@ function TableRow(props) {
       <TDT name="HouseHold Head Name" txt={doc?.household_head_name || "-"} />
       <TDT name="Description" txt={doc?.description || ""} />
       <TDT name="Location" txt={doc?.location || ""} />
-      <TDT name="Total Members" txt={doc?.total_members || "0"} />
+      <TDT name="Total Members" txt={doc?.househole_members?.length || "0"} />
       <TD>
         <TA name="Action" handleView={handleView} id={doc?.id}>
           <div className="w-full mx-auto flex items-center justify-between">
