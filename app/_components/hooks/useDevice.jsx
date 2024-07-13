@@ -1,27 +1,29 @@
 import { useEffect, useState } from "react";
-import useApp from "./useApp";
 
 function useDevice() {
-  const { device, setDevice } = useApp();
+  const getDeviceFromWidth = (width) => {
+    if (width < 768) {
+      return "sm";
+    } else if (width >= 768 && width < 992) {
+      return "md";
+    } else {
+      return "lg";
+    }
+  };
+
+  const [device, setDevice] = useState(getDeviceFromWidth(window.innerWidth));
 
   const handleResize = () => {
     const width = window.innerWidth;
-    if (width < 768) {
-      setDevice("sm");
-    } else if (width >= 768 && width < 992) {
-      setDevice("md");
-    } else {
-      setDevice("lg");
-    }
+    setDevice(getDeviceFromWidth(width));
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [handleResize]);
+  }, []);
 
   return device;
 }

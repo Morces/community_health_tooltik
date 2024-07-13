@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../_components/prisma";
-import { convertBigIntToString } from "../_components/util/convertBigint";
-import { formatOrder, inFilter } from "../_components/util/list";
+import { formatOrder, inFilter } from "../../_components/util/list";
+import { prisma } from "../../_components/prisma";
+import { convertBigIntToString } from "../../_components/util/convertBigint";
 
 export async function GET(req) {
   try {
@@ -9,32 +9,40 @@ export async function GET(req) {
     const page = searchParams.get("page") || 1;
     const limit = searchParams.get("limit") || 10;
     const order = searchParams.get("order") || "desc";
-    const member = searchParams.get("member");
+
+    const household = searchParams.get("household");
+
+    if (!household) {
+      return NextResponse.json(
+        { error: "household is required" },
+        { status: 400 }
+      );
+    }
 
     const whereDoc = {};
     const orderBy = formatOrder(order);
 
     inFilter({
-      filter: member,
+      filter: household,
+      field: "household_id",
       whereDoc,
-      field: "househole_member_id",
     });
 
-    const total = await prisma.patient_records.count({ where: whereDoc });
+    const total = await prisma.househole_members.count({ where: whereDoc });
     const pageNumber = parseInt(page);
     const pageLimit = parseInt(limit);
     const pageCount = Math.ceil(total / pageLimit);
 
     const offset = pageNumber > 1 ? pageNumber * pageLimit - pageLimit : 0;
 
-    const items = await prisma.patient_records.findMany({
+    const items = await prisma.househole_members.findMany({
       where: whereDoc,
       orderBy: orderBy,
       skip: offset,
       take: pageLimit,
       include: {
-        househole_members: true,
-        visits: true,
+        households: true,
+        patient_records: true,
       },
     });
 
@@ -57,8 +65,8 @@ export async function GET(req) {
 
     const result = convertBigIntToString(pagination);
 
-    return NextResponse.json(result);
+    return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message });
   }
 }
