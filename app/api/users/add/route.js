@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../_components/prisma";
 import { hash } from "bcrypt";
+import sendMail from "../../_components/util/sendEmail";
 
 export async function POST(req) {
   try {
@@ -49,6 +50,15 @@ export async function POST(req) {
         phone,
       },
     });
+
+    let mailOptions = {
+      from: "mwkazungu@gmail.com",
+      to: "karanim594@example.com",
+      subject: "Test Email from Nodemailer and Gmail",
+      text: "Hello from Nodemailer using Gmail!",
+    };
+
+    sendMail(mailOptions);
 
     const userResponse = {
       ...newUser,
