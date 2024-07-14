@@ -50,7 +50,7 @@ const page = () => {
         <h3 className="flex gap-2 items-center">
           <span className="text-xl font-semibold">Total Members : </span>
           <span className=" font-semibold text-blue-500">
-            {household?.total_members || "0"}
+            {household?.househole_members?.length + 1 || "0"}
           </span>
         </h3>
       </div>

@@ -55,7 +55,7 @@ export default function Visits() {
         setIsLoading={setIsLoading}
         setDocs={setDocs}
         isFiltered={isFiltered}
-        handleAdd={() => router.push("add")}
+        handleAdd={() => router.push("visits/add")}
         setIsFiltered={setIsFiltered}
         handleRemoveFilters={clearFilters}
         pagination={pagination}
