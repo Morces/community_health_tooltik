@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 const { nextui } = require("@nextui-org/react");
+import { withUt } from "uploadthing/tw";
 
-module.exports = {
+export default withUt({
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,jsx}",
@@ -77,4 +78,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate"), nextui()],
-};
+});

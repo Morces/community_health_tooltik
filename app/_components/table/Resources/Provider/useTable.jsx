@@ -20,33 +20,18 @@ export default function useTable() {
 
   const [order, setOrder] = useState("id-desc");
 
-  // Filters
-  const [roles, setRoles] = useState([]);
-  const [selectedRoles, setSelectedRoles] = useState([]);
-
   useEffect(() => {
     getDocs({ page, limit });
-  }, [limit, selectedRoles, order, page]);
-
-  useEffect(() => {
-    getRoles();
-  }, []);
-
-  useEffect(() => {
-    if (selectedRoles.length === 0) {
-      setIsFiltered(false);
-    }
-  }, [selectedRoles]);
+  }, [limit, order, page]);
 
   async function getDocs({ page, limit }) {
     try {
       setIsLoading(true);
-      const res = await axios.get("/api/users", {
+      const res = await axios.get("/api/resources", {
         params: {
           page,
           limit,
           order,
-          role: selectedRoles.join(","),
         },
       });
 
@@ -63,18 +48,8 @@ export default function useTable() {
     }
   }
 
-  async function getRoles() {
-    try {
-      const res = await axios.get("/api/roles");
-      const { data } = res;
-      setRoles(data?.docs || []);
-    } catch (error) {
-      console.error("Error fetching roles:", error);
-    }
-  }
-
   async function clearFilters() {
-    setSelectedRoles([]);
+    setIsFiltered(false);
   }
 
   function handleNext() {
@@ -112,10 +87,6 @@ export default function useTable() {
       setLimit,
       total_docs: docs?.length || 0,
     },
-    selectedRoles,
-    setSelectedRoles,
-    roles,
-    setRoles,
     setOrder,
     clearFilters,
   };

@@ -1,58 +1,42 @@
-import nextConnect from "next-connect";
-import multer from "multer";
-import cloudinary from "../../api/_components/cloudinary";
-import { prisma } from "../_components/prisma";
+import { NextResponse } from "next/server";
 
-const upload = multer({ storage: multer.memoryStorage() });
+import { prisma } from "../../_components/prisma";
+import { convertBigIntToString } from "../../_components/util/convertBigint";
 
-const apiRoute = nextConnect({
-  onError(error, req, res) {
-    res
-      .status(501)
-      .json({ error: `Sorry something Happened! ${error.message}` });
-  },
-  onNoMatch(req, res) {
-    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
-  },
-});
-
-apiRoute.use(upload.single("file"));
-
-apiRoute.post(async (req, res) => {
+// Create a handler for the POST request
+export async function POST(req) {
   try {
-    const { name, description, resourceType } = req.body;
+    const body = await req.json();
 
-    const uploadStream = cloudinary.uploader.upload_stream(
-      { resource_type: "auto" },
-      async (error, result) => {
-        if (error) {
-          return res.status(500).json({ error: error.message });
-        }
+    const { name, description, url, resource_type } = body;
 
-        // Save the resource info in the database
-        const resource = await prisma.resources.create({
-          data: {
-            name,
-            description,
-            url: result.secure_url,
-            resource_type: resourceType,
-          },
-        });
+    if (!name || !url) {
+      return NextResponse.json(
+        { message: "Missing name or url" },
+        { status: 400 }
+      );
+    }
 
-        res.status(200).json({ resource });
-      }
+    const resource = await prisma.resources.create({
+      data: {
+        name,
+        description,
+        url,
+        resource_type,
+      },
+    });
+
+    const result = convertBigIntToString(resource);
+
+    return NextResponse.json(
+      result,
+      { message: "Resource created successfully" },
+      { status: 201 }
     );
-
-    req.file.stream.pipe(uploadStream);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return NextResponse.json(
+      { message: "Internal Server Error", error: error.message },
+      { status: 500 }
+    );
   }
-});
-
-export default apiRoute;
-
-export const config = {
-  api: {
-    bodyParser: false, // Disable body parsing, so Multer can handle it
-  },
-};
+}
