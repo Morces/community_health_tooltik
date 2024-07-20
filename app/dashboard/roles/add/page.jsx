@@ -69,7 +69,7 @@ const Page = () => {
   }
 
   return (
-    <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
+    <div className="pl-24 pr-5 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
       <div className="flex flex-col space-y-6 rounded-lg shadow-2xl bg-white p-5 w-[85%] m-auto max-md:w-[95%]">
         <h3 className="text-center font-semibold text-xl">Add Role</h3>
         <div className="mt-5">

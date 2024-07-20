@@ -7,6 +7,7 @@ import { Table, TBody } from "../components";
 import Filters from "./Filter";
 import { useRouter } from "next/navigation";
 import TableContext from "./Provider/TableContext";
+import Markdone from "./Table/MarkDone";
 
 export default function Organisations() {
   const {
@@ -25,6 +26,11 @@ export default function Organisations() {
     setSelectedStatus,
     setOrder,
     clearFilters,
+    taskId,
+    setTaskId,
+    showMarkDone,
+    setShowMarkDone,
+    markDone,
   } = useTable();
 
   const router = useRouter();
@@ -47,6 +53,11 @@ export default function Organisations() {
         setSelectedStatus,
         setOrder,
         clearFilters,
+        taskId,
+        setTaskId,
+        showMarkDone,
+        setShowMarkDone,
+        markDone,
       }}
     >
       <Table
@@ -69,6 +80,13 @@ export default function Organisations() {
           })}
         </TBody>
       </Table>
+      {showMarkDone && (
+        <Markdone
+          showMarkDone={showMarkDone}
+          setShowMarkDone={setShowMarkDone}
+          markDone={markDone}
+        />
+      )}
     </TableContext.Provider>
   );
 }

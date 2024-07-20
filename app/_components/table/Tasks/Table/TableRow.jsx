@@ -6,10 +6,20 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { convDate } from "@/app/_components/util/Time";
 import { HiOutlineShare } from "react-icons/hi";
+import { useContext } from "react";
+import TableContext from "../Provider/TableContext";
+import { GoCheckCircle } from "react-icons/go";
 
 function TableRow(props) {
   const { doc } = props;
   const router = useRouter();
+
+  const { setTaskId, setShowMarkDone } = useContext(TableContext);
+
+  function openModal() {
+    setTaskId(doc.id);
+    setShowMarkDone(true);
+  }
 
   const handleView = () => {
     router.push(`/dashboard/tasks/view/${doc?.id}`);
@@ -74,19 +84,28 @@ function TableRow(props) {
         }
       />
       <TD>
-        <TA name="Action" handleView={handleView} id={doc?.id}>
+        <TA name="Action" id={doc?.id}>
           <div className="w-full mx-auto flex items-center justify-between">
             <p className="text-center flex gap-2" onClick={handleEdit}>
               <FaRegEdit className="text-blue-500 text-xl text-center" />
               <span>Edit</span>
             </p>
           </div>
-          <div className="w-full mx-auto flex items-center justify-between">
-            <p className="text-center flex gap-2" onClick={handleAllocate}>
-              <HiOutlineShare className="text-green-500 text-xl text-center" />
-              <span>Allocate</span>
-            </p>
-          </div>
+          {doc?.task_status?.name == "allocate" ? (
+            <div className="w-full mx-auto flex items-center justify-between">
+              <p className="text-center flex gap-2" onClick={handleAllocate}>
+                <HiOutlineShare className="text-green-500 text-xl text-center" />
+                <span>Allocate</span>
+              </p>
+            </div>
+          ) : (
+            <div className="w-full mx-auto flex items-center justify-between">
+              <p className="text-center flex gap-2" onClick={openModal}>
+                <GoCheckCircle className="text-green-500 text-xl text-center" />
+                <span>Mark done</span>
+              </p>
+            </div>
+          )}
           <div
             onClick={() => {}}
             className="w-full mx-auto flex items-center justify-between"

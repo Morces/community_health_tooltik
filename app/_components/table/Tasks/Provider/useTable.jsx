@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useRouter } from "next/navigation";
 
 const initDoc = [];
 
@@ -10,6 +13,9 @@ export default function useTable() {
   const [docs, setDocs] = useState(initDoc);
   const [isLoading, setIsLoading] = useState(true);
   const [isFiltered, setIsFiltered] = useState(false);
+
+  const { toast } = useToast();
+  const router = useRouter();
 
   // Pagination
   const [page, setPage] = useState(1);
@@ -23,6 +29,9 @@ export default function useTable() {
   // Filters
   const [status, setStatus] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
+
+  const [taskId, setTaskId] = useState(null);
+  const [showMarkDone, setShowMarkDone] = useState(false);
 
   useEffect(() => {
     getDocs({ page, limit });
@@ -60,6 +69,32 @@ export default function useTable() {
     } catch (error) {
       console.error("Error fetching docs:", error);
       setIsLoading(false);
+    }
+  }
+
+  async function markDone() {
+    try {
+      const res = await axios.put("/api/tasks/done", {
+        id: parseInt(taskId),
+      });
+
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "Task marked as done.",
+      });
+
+      getDocs({ page, limit });
+
+      setShowMarkDone(false);
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
     }
   }
 
@@ -118,5 +153,10 @@ export default function useTable() {
     setStatus,
     setOrder,
     clearFilters,
+    taskId,
+    setTaskId,
+    showMarkDone,
+    setShowMarkDone,
+    markDone,
   };
 }

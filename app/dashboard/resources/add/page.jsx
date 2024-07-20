@@ -51,7 +51,7 @@ export default function Page() {
   }
 
   return (
-    <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
+    <div className="pl-24 pr-5 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
       <div className="bg-white p-5 rounded-xl shadow-xl">
         <h3 className="text-center font-semibold text-xl">Add A Resource</h3>
         <div className="mt-5 flex gap-5 max-md:flex-wrap">

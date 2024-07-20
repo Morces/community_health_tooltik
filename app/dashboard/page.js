@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Graph from "../_components/Dashboard/Graph";
 
 export default function Home() {
   const [timeOfDay, setTimeOfDay] = useState("Morning");
@@ -28,8 +29,8 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <main className="flex min-h-screen w-full mt-5 flex-col items-center p-24">
+    <div>
+      <main className="flex min-h-screen w-full mt-5 flex-col items-center pl-24 pr-5 max-md:w-full max-md:p-2">
         <h2 className="font-medium text-3xl">{`Good ${timeOfDay}, ${
           session?.user?.name || name
         }`}</h2>
@@ -38,6 +39,9 @@ export default function Home() {
           Don't wait until it's too late! Complete you tasks in time 😊
         </p>
       </main>
-    </>
+      <div className="mt-6">
+        <Graph />
+      </div>
+    </div>
   );
 }

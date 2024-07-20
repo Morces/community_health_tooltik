@@ -12,6 +12,10 @@ export function AppProvider({ children }) {
   const [device, setDevice] = useState("lg");
   const [user, setUser] = useState({});
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const value = useMemo(
     () => ({
       isSidebarOpen,
@@ -26,8 +30,17 @@ export function AppProvider({ children }) {
       setDevice,
       user,
       setUser,
+      toggleSidebar,
     }),
-    [isSidebarOpen, errorModal, errorMessage, token, device, user]
+    [
+      isSidebarOpen,
+      errorModal,
+      errorMessage,
+      token,
+      device,
+      user,
+      toggleSidebar,
+    ]
   );
 
   return (
@@ -46,6 +59,7 @@ export function AppProvider({ children }) {
           setDevice,
           user,
           setUser,
+          toggleSidebar,
         }}
       >
         {children}

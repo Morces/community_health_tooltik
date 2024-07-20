@@ -11,11 +11,11 @@ function TableRow(props) {
   const router = useRouter();
 
   const handleView = () => {
-    router.push(`/dashboard/tasks/view/${doc?.id}`);
+    router.push(`/dashboard/visits/view/${doc?.id}`);
   };
 
   const handleEdit = () => {
-    router.push(`/dashboard/tasks/edit/${doc?.id}`);
+    router.push(`/dashboard/visits/edit/${doc?.id}`);
   };
 
   return (

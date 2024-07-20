@@ -27,7 +27,7 @@ const page = () => {
   }
 
   return (
-    <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
+    <div className="pl-24 pr-5 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
       <div className="mt-5 bg-white shadow-xl rounded-xl p-4 flex justify-between max-md:flex-wrap items-center">
         <h3 className="flex gap-2 items-center">
           <span className="text-xl font-semibold">Household Name : </span>
