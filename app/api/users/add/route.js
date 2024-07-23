@@ -52,10 +52,14 @@ export async function POST(req) {
     });
 
     let mailOptions = {
-      from: "mwkazungu@gmail.com",
-      to: "karanim594@example.com",
+      from: "karanim594@gmail.com", 
+      to: "mwkazungu@gmail.com",
       subject: "Test Email from Nodemailer and Gmail",
       text: "Hello from Nodemailer using Gmail!",
+      html:
+        `
+        
+        `
     };
 
     sendMail(mailOptions);

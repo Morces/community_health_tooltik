@@ -67,11 +67,13 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/react": "18.3.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
     "prisma": "^5.16.1",
     "tailwindcss": "^3.4.1",
+    "typescript": "5.5.4",
     "webpack": "^5.93.0"
   }
 }

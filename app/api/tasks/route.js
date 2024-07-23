@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { formatOrder, inFilter } from "../_components/util/list";
 import { prisma } from "../_components/prisma";
 import { convertBigIntToString } from "../_components/util/convertBigint";
+import sendMail from "../_components/util/sendEmail";
 
 export async function GET(req) {
   try {
@@ -56,6 +57,18 @@ export async function GET(req) {
         take: pageLimit,
       },
     };
+
+    let mailOptions = {
+      from: "karanim594@gmail.com",
+      to: "mwkazungu@gmail.com",
+      subject: "Test Email from Nodemailer and Gmail",
+      text: "Hello from Nodemailer using Gmail!",
+      html: `
+        
+        `,
+    };
+
+    sendMail(mailOptions);
 
     const result = convertBigIntToString(pagination);
 
