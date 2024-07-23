@@ -36,7 +36,7 @@ export default function Home() {
         }`}</h2>
 
         <p className="mt-2">
-          Don't wait until it's too late! Complete you tasks in time 😊
+          Don&apos;t wait until it&apos;s too late! Complete you tasks in time 😊
         </p>
       </main>
       <div className="mt-6">

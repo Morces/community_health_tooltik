@@ -9,7 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Add = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -117,4 +117,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Add;

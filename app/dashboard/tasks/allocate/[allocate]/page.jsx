@@ -11,7 +11,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 
-const page = () => {
+const Allocate = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { allocate } = useParams();
@@ -105,4 +105,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Allocate;

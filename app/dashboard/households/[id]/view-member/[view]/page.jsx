@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import PatientRecords from "../../../../../_components/table/PatientRecords";
 
-const page = () => {
+const View = () => {
   const [member, setMember] = useState({});
   const { view } = useParams();
 
@@ -54,4 +54,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default View;

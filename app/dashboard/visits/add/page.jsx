@@ -5,7 +5,7 @@ import { Input } from "@nextui-org/input";
 import { Textarea } from "@nextui-org/react";
 import axios from "axios";
 
-const page = () => {
+const Add = () => {
   const [task_id, setTaskId] = useState(null);
   const [patient_record_id, setPatientRecordId] = useState(null);
   const [patientRecords, setPatientsRecords] = useState([]);
@@ -131,4 +131,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Add;

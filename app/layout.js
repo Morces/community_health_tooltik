@@ -3,13 +3,18 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import { AppProvider } from "./AppProvider";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Community Health ToolKit",
   description: "Community Health ToolKit",
+  manifest: "/manifest.json",
+};
+
+export const viewport = {
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({ children }) {

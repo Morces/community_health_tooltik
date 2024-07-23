@@ -8,7 +8,7 @@ import { ToastAction } from "@/components/ui/toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Add = () => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState();
   const [description, setDescription] = useState("");
@@ -93,4 +93,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Add;

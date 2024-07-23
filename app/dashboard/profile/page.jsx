@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Profile = () => {
   const { data: session } = useSession();
   const { toast } = useToast();
   const router = useRouter();
@@ -180,4 +180,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Profile;

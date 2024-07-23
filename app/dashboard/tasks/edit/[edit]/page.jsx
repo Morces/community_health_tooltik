@@ -11,7 +11,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 
-const page = () => {
+const Edit = () => {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -179,4 +179,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Edit;
