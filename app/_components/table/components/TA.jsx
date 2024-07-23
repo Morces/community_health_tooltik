@@ -31,7 +31,7 @@ function TA(props) {
           <SlOptionsVertical />
         </span>
         <ViewAction handleView={handleView} setActive={setActive} />
-        <DropDown children={children} active={active} id={id} />
+        <DropDown active={active} id={id} />
       </div>
     </td>
   );
@@ -60,7 +60,7 @@ function ViewAction(props) {
 }
 
 function DropDown(props) {
-  const { children = null, active = null, id = null } = props;
+  const { active = null, id = null } = props;
 
   if (!active) {
     return null;

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "license": "",
   "dependencies": {
     "@cloudinary/url-gen": "^1.19.0",
     "@ducanh2912/next-pwa": "^10.2.8",

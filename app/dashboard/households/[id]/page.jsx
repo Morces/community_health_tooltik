@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-const page = () => {
+const Page = () => {
   const [household, setHousehold] = useState("");
 
   const { id } = useParams();
@@ -61,4 +61,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
