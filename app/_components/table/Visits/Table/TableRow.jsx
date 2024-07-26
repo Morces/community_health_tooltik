@@ -4,7 +4,6 @@ import { TR, TDT, TA, TD } from "../../components";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import { convDate2 } from "@/app/_components/util/Time";
 
 function TableRow(props) {
   const { doc } = props;

@@ -4,7 +4,7 @@ import { TR, TDT, TA, TD } from "../../components";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import { convDate } from "@/app/_components/util/Time";
+import { convDate } from "../../../../_components/util/Time";
 import { HiOutlineShare } from "react-icons/hi";
 import { useContext } from "react";
 import TableContext from "../Provider/TableContext";

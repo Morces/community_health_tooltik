@@ -1,6 +1,10 @@
 import React from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../../components/ui/avatar";
 import { useSession } from "next-auth/react";
 
 const TopNav = ({ toggleSidebar }) => {

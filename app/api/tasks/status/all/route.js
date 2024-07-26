@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { formatOrder } from "@/app/api/_components/util/list";
+import { formatOrder } from "../../../_components/util/list";
 import { prisma } from "../../../_components/prisma";
-import { convertBigIntToString } from "@/app/api/_components/util/convertBigint";
+import { convertBigIntToString } from "../../../_components/util/convertBigint";
 
 export async function GET(req) {
   try {

@@ -1,6 +1,6 @@
 "use client";
 
-import Households from "@/app/_components/table/HouseholdMembers";
+import Households from "../../../_components/table/Households";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";

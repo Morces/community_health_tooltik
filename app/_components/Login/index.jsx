@@ -11,8 +11,8 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import logo from "../../Assets/cht_logo.png";
 
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "../../../components/ui/use-toast";
+import { ToastAction } from "../../../components/ui/toast";
 
 const Login = () => {
   const router = useRouter();

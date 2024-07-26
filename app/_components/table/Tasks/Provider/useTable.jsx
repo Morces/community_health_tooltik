@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "../../../../../components/ui/use-toast";
+import { ToastAction } from "../../../../../components/ui/toast";
 import { useRouter } from "next/navigation";
 
 const initDoc = [];
