@@ -1,10 +1,27 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { MdOutlinePhonelink } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import axios from "axios";
 
 const Users = () => {
+  const [members, setMembers] = useState(0);
+  const [admin, setAdmins] = useState(0);
+  const [supervisors, setSupervisors] = useState(0);
+
+  useEffect(() => {}, []);
+
+  async function totalMembers() {
+    try {
+      let res = await axios.get();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="bg-white p-3 shadow-2xl rounded-lg flex-1">
       <div className="flex items-center justify-between mb-2">

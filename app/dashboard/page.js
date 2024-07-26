@@ -86,10 +86,7 @@ export default function Home() {
           <AllWorkers />
         </div>
 
-        <div className="mt-5">
-          {" "}
-          <Users />
-        </div>
+        <div className="mt-5"> {/* <Users /> */}</div>
         <div className="mt-6 w-full flex justify-between gap-6 items-center max-md:flex-col">
           <TotalUsers />
         </div>

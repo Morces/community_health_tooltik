@@ -32,6 +32,49 @@ function TableRow(props) {
     router.push(`/dashboard/tasks/edit/${doc?.id}`);
   };
 
+  const dropdownItems = [
+    <div
+      className="w-full mx-auto flex items-center justify-between"
+      key="edit"
+    >
+      <p className="text-center flex gap-2" onClick={handleEdit}>
+        <FaRegEdit className="text-blue-500 text-xl text-center" />
+        <span>Edit</span>
+      </p>
+    </div>,
+    doc?.task_status?.name == "allocate" ? (
+      <div
+        className="w-full mx-auto flex items-center justify-between"
+        key="allocate"
+      >
+        <p className="text-center flex gap-2" onClick={handleAllocate}>
+          <HiOutlineShare className="text-green-500 text-xl text-center" />
+          <span>Allocate</span>
+        </p>
+      </div>
+    ) : (
+      <div
+        className="w-full mx-auto flex items-center justify-between"
+        key="mark-done"
+      >
+        <p className="text-center flex gap-2" onClick={openModal}>
+          <GoCheckCircle className="text-green-500 text-xl text-center" />
+          <span>Mark done</span>
+        </p>
+      </div>
+    ),
+    <div
+      onClick={() => {}}
+      className="w-full mx-auto flex items-center justify-between"
+      key="delete"
+    >
+      <p className="text-center flex gap-2">
+        <RiDeleteBin5Line className="text-red text-xl text-center" />
+        <span className="text-red">Delete</span>
+      </p>
+    </div>,
+  ];
+
   return (
     <TR>
       <TDT name="#" txt={doc?.id || "-"} />
@@ -84,38 +127,12 @@ function TableRow(props) {
         }
       />
       <TD>
-        <TA name="Action" id={doc?.id}>
-          <div className="w-full mx-auto flex items-center justify-between">
-            <p className="text-center flex gap-2" onClick={handleEdit}>
-              <FaRegEdit className="text-blue-500 text-xl text-center" />
-              <span>Edit</span>
-            </p>
-          </div>
-          {doc?.task_status?.name == "allocate" ? (
-            <div className="w-full mx-auto flex items-center justify-between">
-              <p className="text-center flex gap-2" onClick={handleAllocate}>
-                <HiOutlineShare className="text-green-500 text-xl text-center" />
-                <span>Allocate</span>
-              </p>
-            </div>
-          ) : (
-            <div className="w-full mx-auto flex items-center justify-between">
-              <p className="text-center flex gap-2" onClick={openModal}>
-                <GoCheckCircle className="text-green-500 text-xl text-center" />
-                <span>Mark done</span>
-              </p>
-            </div>
-          )}
-          <div
-            onClick={() => {}}
-            className="w-full mx-auto flex items-center justify-between"
-          >
-            <p className="text-center flex gap-2">
-              <RiDeleteBin5Line className="text-red text-xl text-center" />
-              <span className="text-red">Delete</span>
-            </p>
-          </div>
-        </TA>
+        <TA
+          name="Action"
+          id={doc?.id}
+          dropdownItems={dropdownItems}
+          handleView={handleView}
+        />
       </TD>
     </TR>
   );
