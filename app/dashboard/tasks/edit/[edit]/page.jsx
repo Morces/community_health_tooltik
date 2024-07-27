@@ -6,8 +6,8 @@ import { Input } from "@nextui-org/input";
 import { DateInput } from "@nextui-org/date-input";
 import { parseDate } from "@internationalized/date";
 import { Button } from "@nextui-org/react";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "../../../../components/ui/use-toast";
+import { ToastAction } from "../../../../components/ui/toast";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 

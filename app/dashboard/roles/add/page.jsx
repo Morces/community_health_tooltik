@@ -5,8 +5,8 @@ import { Textarea } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "../../../../components/ui/use-toast";
+import { ToastAction } from "../../../../components/ui/toast";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 

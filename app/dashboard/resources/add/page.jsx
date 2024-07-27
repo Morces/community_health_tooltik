@@ -3,8 +3,8 @@
 import { Input } from "@nextui-org/input";
 import { Textarea } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "../../../../components/ui/use-toast";
+import { ToastAction } from "../../../../components/ui/toast";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
