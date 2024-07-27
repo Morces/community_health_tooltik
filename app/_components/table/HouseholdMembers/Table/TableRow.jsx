@@ -18,6 +18,28 @@ function TableRow(props) {
     router.push(`/dashboard/households/${doc?.id}`);
   };
 
+  const items = [
+    <div
+      className="w-full mx-auto flex items-center justify-between"
+      key="edit"
+    >
+      <p className="text-center flex gap-2" onClick={handleEdit}>
+        <FaRegEdit className="text-blue-500 text-xl text-center" />
+        <span>Edit</span>
+      </p>
+    </div>,
+    <div
+      onClick={""}
+      key="del"
+      className="w-full mx-auto flex items-center justify-between"
+    >
+      <p className="text-center flex gap-2">
+        <RiDeleteBin5Line className="text-red text-xl text-center" />
+        <span className="text-red">Delete</span>
+      </p>
+    </div>,
+  ];
+
   return (
     <TR>
       <TDT name="#" txt={doc?.id || "-"} />
@@ -25,23 +47,12 @@ function TableRow(props) {
       <TDT name="AGE" txt={doc?.age || ""} />
       <TDT name="Relationship" txt={doc?.relationship || ""} />
       <TD>
-        <TA name="Action" handleView={handleView} id={doc?.id}>
-          <div className="w-full mx-auto flex items-center justify-between">
-            <p className="text-center flex gap-2" onClick={handleEdit}>
-              <FaRegEdit className="text-blue-500 text-xl text-center" />
-              <span>Edit</span>
-            </p>
-          </div>
-          <div
-            onClick={""}
-            className="w-full mx-auto flex items-center justify-between"
-          >
-            <p className="text-center flex gap-2">
-              <RiDeleteBin5Line className="text-red text-xl text-center" />
-              <span className="text-red">Delete</span>
-            </p>
-          </div>
-        </TA>
+        <TA
+          name="Action"
+          handleView={handleView}
+          id={doc?.id}
+          dropdownItems={items}
+        />
       </TD>
     </TR>
   );
