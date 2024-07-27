@@ -1,5 +1,5 @@
-import { prisma } from "@/app/api/_components/prisma";
-import { convertBigIntToString } from "@/app/api/_components/util/convertBigint";
+import { prisma } from "../../../_components/prisma";
+import { convertBigIntToString } from "../../../_components/util/convertBigint";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
