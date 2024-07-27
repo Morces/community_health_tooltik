@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
 import { FileText, Pencil } from "lucide-react";
-import { UploadDropzone } from "@/app/_components/util/uploadthing";
+import { UploadDropzone } from "../../../_components/util/uploadthing";
 import Link from "next/link";
 
 export default function Page() {
