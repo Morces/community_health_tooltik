@@ -31,9 +31,21 @@ const Edit = () => {
   const [workers, setWorkers] = useState([]);
   const { edit } = useParams();
 
+  useEffect(() => {
+    getTask();
+  }, []);
+
   async function getTask() {
     try {
-      let res = await axios("/api/");
+      let res = await axios(`/api/tasks/single`, {
+        params: {
+          id: parseInt(edit),
+        },
+      });
+
+      const { data } = res;
+
+      setName(data?.name);
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +53,7 @@ const Edit = () => {
 
   async function getMembers() {
     try {
-      const res = await axios.get("/api/users", {
+      const res = await axios.get("/api/users/allstaff", {
         params: {},
       });
       const { data } = res;

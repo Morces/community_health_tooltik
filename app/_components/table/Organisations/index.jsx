@@ -25,6 +25,7 @@ export default function Organisations() {
     setSelectedRoles,
     setOrder,
     clearFilters,
+    refetchDocs,
   } = useTable();
 
   const router = useRouter();
@@ -47,6 +48,7 @@ export default function Organisations() {
         setSelectedRoles,
         setOrder,
         clearFilters,
+        refetchDocs,
       }}
     >
       <Table
@@ -60,12 +62,18 @@ export default function Organisations() {
         handleRemoveFilters={clearFilters}
         pagination={pagination}
         url="organisations/search"
-        FilterComponent={<Filters />}
+        // FilterComponent={<Filters />}
       >
         <TableHead setOrder={setOrder} />
         <TBody>
           {docs.map((doc, i) => {
-            return <TableRow key={doc?.id || i} doc={doc} />;
+            return (
+              <TableRow
+                key={doc?.id || i}
+                doc={doc}
+                refetchDocs={refetchDocs}
+              />
+            );
           })}
         </TBody>
       </Table>

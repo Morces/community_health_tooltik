@@ -91,17 +91,7 @@ function TotalUsers() {
             <option value="">Year</option>
           </select>
         </div>
-        <div className="relative">
-          <BsThreeDotsVertical
-            className="text-2xl cursor-pointer"
-            onClick={() => setShowReport(!showReport)}
-          />
-          {showReport && (
-            <div className="absolute w-[180px] top-3 right-6 bg-white rounded-md shadow-xl border p-3">
-              <p className="font-bold cursor-pointer">Download Report</p>
-            </div>
-          )}
-        </div>
+        <div className="relative"></div>
       </div>
 
       <div className="mt-5" style={{ width: "100%", height: 350 }}>

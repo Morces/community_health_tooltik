@@ -31,6 +31,7 @@ export default function Organisations() {
     showMarkDone,
     setShowMarkDone,
     markDone,
+    refetchDocs,
   } = useTable();
 
   const router = useRouter();
@@ -58,6 +59,7 @@ export default function Organisations() {
         showMarkDone,
         setShowMarkDone,
         markDone,
+        refetchDocs,
       }}
     >
       <Table
@@ -76,7 +78,13 @@ export default function Organisations() {
         <TableHead setOrder={setOrder} />
         <TBody>
           {docs.map((doc, i) => {
-            return <TableRow key={doc?.id || i} doc={doc} />;
+            return (
+              <TableRow
+                key={doc?.id || i}
+                doc={doc}
+                refetchDocs={refetchDocs}
+              />
+            );
           })}
         </TBody>
       </Table>

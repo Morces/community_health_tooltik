@@ -29,14 +29,6 @@ export async function POST(req) {
       );
     }
 
-    // const status = await prisma.task_status.findUnique({
-    //   where: { id: parseInt(task_status_id) },
-    // });
-
-    // if (!status) {
-    //   return NextResponse.json({ message: "Task status not found" });
-    // }
-
     const allocationPeriodFrom = new Date(allocation_period_from).toISOString();
     const allocationPeriodTo = new Date(allocation_period_to).toISOString();
 

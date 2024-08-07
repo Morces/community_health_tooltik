@@ -11,6 +11,9 @@ export async function GET(request) {
       where: { id: parseInt(id) },
       include: {
         roles: true,
+        tasks_tasks_allocated_byTomembers: true,
+        tasks_tasks_allocated_toTomembers: true,
+        organisations: true,
       },
     });
 

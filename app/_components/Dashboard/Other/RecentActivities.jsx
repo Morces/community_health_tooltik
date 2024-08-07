@@ -26,7 +26,7 @@ const RecentActivities = () => {
     <div className="rounded-md p-3 shadow-xl bg-white">
       <div className="flex items-center justify-between w-full">
         <p className="text-xl">Recent Activities</p>
-        <BsThreeDotsVertical className="cursor-pointer text-xl" />
+        {/* <BsThreeDotsVertical className="cursor-pointer text-xl" /> */}
       </div>
       {data.map((item, i) => (
         <div

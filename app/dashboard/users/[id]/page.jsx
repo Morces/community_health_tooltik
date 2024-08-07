@@ -1,36 +1,48 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import UserTasks from "../../../_components/table/UserTasks";
+import { useParams } from "next/navigation";
+import axios from "axios";
 
-const UserAction = () => {
-  const router = useRouter();
+const Page = () => {
+  useEffect(() => {
+    getUser();
+  }, []);
 
-  console.log(router);
-  const { id, slug } = router.query;
+  const { id } = useParams();
 
-  if (!slug) {
-    return <div>Loading...</div>;
+  const [user, setUser] = useState({});
+
+  async function getUser() {
+    try {
+      const res = await axios.get(`/api/users/${id}`);
+
+      const { data } = res;
+
+      setUser(data?.user);
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  const [action] = slug;
-
   return (
-    <div className="px-24 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
-      {action === "edit" ? (
-        <>
-          <h1>Edit Item</h1>
-          <p>Editing item with ID: {id}</p>
-          {/* Add form or components to edit the item's information */}
-        </>
-      ) : (
-        <>
-          <h1>View Item</h1>
-          <p>Viewing item with ID: {id}</p>
-          {/* Add components to display the item's information */}
-        </>
-      )}
+    <div className="pl-24 pr-5 max-md:px-0 max-md:pr-3 ml-6 max-md:ml-0">
+      <div className="rounded-lg p-4 bg-white mb-4 flex justify-between items-center max-md:flex-wrap">
+        <p className="flex gap-3">
+          Name: <span>{user?.name}</span>
+        </p>
+        <p className="flex gap-3">
+          Role: <span>{user?.roles?.name}</span>
+        </p>
+        <p className="flex gap-3">
+          Specialization: <span>{user?.specialization}</span>
+        </p>
+      </div>
+      <div className="flex flex-col space-y-6 rounded-lg shadow-2xl bg-white p-5 ">
+        <UserTasks />
+      </div>
     </div>
   );
 };
 
-export default UserAction;
+export default Page;

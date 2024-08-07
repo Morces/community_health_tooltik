@@ -42,7 +42,7 @@ const Login = () => {
     } else {
       toast({
         variant: "success",
-        title: "Logging you in...",
+        title: "Logging in...",
         description: "",
       });
       router.refresh();

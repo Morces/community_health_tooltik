@@ -32,7 +32,7 @@ const Add = () => {
 
   async function getMembers() {
     try {
-      const res = await axios.get("/api/users", {
+      const res = await axios.get("/api/users/allstaff", {
         params: {},
       });
       const { data } = res;
@@ -64,6 +64,7 @@ const Add = () => {
         allocated_by: parseInt(allocatedBy),
         allocated_to: parseInt(allocatedTo),
         description,
+        allocation_area: allocationArea,
       });
 
       toast({

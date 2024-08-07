@@ -31,7 +31,12 @@ function TA(props) {
           <SlOptionsVertical />
         </span>
         <ViewAction handleView={handleView} setActive={setActive} />
-        <DropDown active={active} id={id} items={dropdownItems} />
+        <DropDown
+          active={active}
+          id={id}
+          items={dropdownItems}
+          setActive={setActive}
+        />
       </div>
     </td>
   );
@@ -60,11 +65,18 @@ function ViewAction(props) {
 }
 
 function DropDown(props) {
-  const { active = null, id = null, items = [] } = props;
+  const { active = null, id = null, items = [], setActive } = props;
 
   if (!active || active !== id) {
     return null;
   }
+
+  const handleItemClick = (callback) => {
+    setActive(null);
+    if (typeof callback === "function") {
+      callback();
+    }
+  };
 
   return (
     <ul
@@ -75,6 +87,7 @@ function DropDown(props) {
         <li
           key={index}
           className="w-full cursor-pointer hover:text-primary border-b-2"
+          onClick={() => handleItemClick(item.props.onClick)}
         >
           {item}
         </li>

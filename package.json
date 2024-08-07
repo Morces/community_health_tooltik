@@ -20,6 +20,7 @@
     "@nextui-org/checkbox": "^2.1.2",
     "@nextui-org/date-input": "^2.1.1",
     "@nextui-org/input": "^2.2.2",
+    "@nextui-org/modal": "^2.0.39",
     "@nextui-org/react": "^2.4.1",
     "@nextui-org/select": "^2.2.2",
     "@nextui-org/table": "^2.0.36",

@@ -4,9 +4,23 @@ import { TR, TDT, TA, TD } from "../../components";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
+import { useToast } from "../../../../../components/ui/use-toast";
+import { ToastAction } from "../../../../../components/ui/toast";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
+import axios from "axios";
 
 function TableRow(props) {
-  const { doc } = props;
+  const { doc, refetchDocs } = props;
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { toast } = useToast();
   const router = useRouter();
 
   const handleView = () => {
@@ -14,7 +28,35 @@ function TableRow(props) {
   };
 
   const handleEdit = () => {
-    router.push(`/dashboard/users/${doc?.id}`);
+    router.push(`/dashboard/users/edit/${doc?.id}`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(`/api/users/delete`, {
+        params: {
+          id: parseInt(doc?.id),
+        },
+      });
+
+      const { data } = res;
+
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "User has been deleted successfully.",
+      });
+      refetchDocs();
+      onClose();
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    }
   };
 
   const items = [
@@ -28,7 +70,7 @@ function TableRow(props) {
       </p>
     </div>,
     <div
-      onClick={() => {}}
+      onClick={onOpen}
       key="del"
       className="w-full mx-auto flex items-center justify-between"
     >
@@ -40,22 +82,56 @@ function TableRow(props) {
   ];
 
   return (
-    <TR>
-      <TDT name="#" txt={doc?.id || "-"} />
-      <TDT name="Member Name" txt={doc?.name || "-"} />
-      <TDT name="Phone" txt={doc?.phone || ""} />
-      <TDT name="Email" txt={doc?.email || ""} />
-      <TDT name="Role" txt={doc?.roles?.name || ""} />
+    <>
+      <TR>
+        <TDT name="#" txt={doc?.id || "-"} />
+        <TDT name="Member Name" txt={doc?.name || "-"} />
+        <TDT name="Phone" txt={doc?.phone || ""} />
+        <TDT name="Email" txt={doc?.email || ""} />
+        <TDT name="Role" txt={doc?.roles?.name || ""} />
 
-      <TD>
-        <TA
-          name="Action"
-          handleView={handleView}
-          id={doc?.id}
-          dropdownItems={items}
-        />
-      </TD>
-    </TR>
+        <TD>
+          <TA
+            name="Action"
+            handleView={handleView}
+            id={doc?.id}
+            dropdownItems={items}
+          />
+        </TD>
+      </TR>
+
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isDismissable={false}
+        isKeyboardDismissDisabled={true}
+        backdrop="blur"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1 text-center">
+                Delete Member
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  This action is irreversible. Are you sure you want to delete
+                  member {doc?.name} ?
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={handleDelete}>
+                  Delete
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 

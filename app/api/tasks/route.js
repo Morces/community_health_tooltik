@@ -11,6 +11,7 @@ export async function GET(req) {
     const limit = searchParams.get("limit") || 10;
     const order = searchParams.get("order") || "desc";
     const status = searchParams.get("status") || "";
+    const member = searchParams.get("member");
 
     const whereDoc = {};
     const orderBy = formatOrder(order);
@@ -19,6 +20,12 @@ export async function GET(req) {
       filter: status,
       whereDoc,
       field: "task_status_id",
+    });
+
+    inFilter({
+      filter: member,
+      whereDoc,
+      field: "allocated_to",
     });
 
     const total = await prisma.tasks.count({ where: whereDoc });

@@ -6,13 +6,19 @@ import { convertBigIntToString } from "../../_components/util/convertBigint";
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id") || 1;
+    const id = searchParams.get("id");
 
-    const task = await prisma.tas;
+    const task = await prisma.tasks.findUnique({
+      where: { id: parseInt(id) },
+    });
 
-    const result = convertBigIntToString(pagination);
+    if (!task) {
+      return NextResponse.json({ message: "Task not found" }, { status: 400 });
+    }
 
-    return NextResponse.json(result);
+    const result = convertBigIntToString(task);
+
+    return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
