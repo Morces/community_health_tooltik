@@ -25,6 +25,7 @@ export default function Households() {
     setSelectedRoles,
     setOrder,
     clearFilters,
+    refetchDocs,
   } = useTable();
 
   const router = useRouter();
@@ -47,6 +48,7 @@ export default function Households() {
         setSelectedRoles,
         setOrder,
         clearFilters,
+        refetchDocs,
       }}
     >
       <Table
@@ -65,7 +67,13 @@ export default function Households() {
         <TableHead setOrder={setOrder} />
         <TBody>
           {docs.map((doc, i) => {
-            return <TableRow key={doc?.id || i} doc={doc} />;
+            return (
+              <TableRow
+                key={doc?.id || i}
+                doc={doc}
+                refetchDocs={refetchDocs}
+              />
+            );
           })}
         </TBody>
       </Table>

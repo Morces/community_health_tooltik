@@ -25,6 +25,7 @@ export default function Visits() {
     setSelectedStatus,
     setOrder,
     clearFilters,
+    refetchDocs,
   } = useTable();
 
   const router = useRouter();
@@ -47,6 +48,7 @@ export default function Visits() {
         setSelectedStatus,
         setOrder,
         clearFilters,
+        refetchDocs,
       }}
     >
       <Table
@@ -60,12 +62,18 @@ export default function Visits() {
         handleRemoveFilters={clearFilters}
         pagination={pagination}
         url="visits/search"
-        FilterComponent={<Filters />}
+        // FilterComponent={<Filters />}
       >
         <TableHead setOrder={setOrder} />
         <TBody>
           {docs.map((doc, i) => {
-            return <TableRow key={doc?.id || i} doc={doc} />;
+            return (
+              <TableRow
+                key={doc?.id || i}
+                doc={doc}
+                refetchDocs={refetchDocs}
+              />
+            );
           })}
         </TBody>
       </Table>

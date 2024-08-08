@@ -1,9 +1,9 @@
 "use client";
 
-import Households from "../../../_components/table/Households";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import HouseholdsMembers from "../../../_components/table/HouseholdMembers";
 
 const Page = () => {
   const [household, setHousehold] = useState("");
@@ -55,7 +55,7 @@ const Page = () => {
         </h3>
       </div>
       <div className="mt-5">
-        <Households />
+        <HouseholdsMembers />
       </div>
     </div>
   );
