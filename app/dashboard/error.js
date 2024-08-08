@@ -9,7 +9,7 @@ export default function Error({ error, reset }) {
   }, [error]);
 
   return (
-    <div>
+    <div className="h-screen justify-center items-center">
       <h2>Something went wrong!</h2>
       <button
         onClick={
