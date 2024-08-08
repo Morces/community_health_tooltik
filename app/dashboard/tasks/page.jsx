@@ -5,7 +5,7 @@ import TasksTable from "../../_components/table/Tasks";
 import WorkerTasks from "../../_components/table/WorkerTasks";
 import { useSession } from "next-auth/react";
 
-const page = () => {
+const Page = () => {
   const { data: session } = useSession();
 
   const role = session?.user?.role;
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
