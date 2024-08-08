@@ -22,6 +22,7 @@ export default function Resources() {
     pagination,
     setOrder,
     clearFilters,
+    refetchDocs,
   } = useTable();
 
   const router = useRouter();
@@ -58,7 +59,9 @@ export default function Resources() {
         <TBody>
           <div className="mt-5 flex gap-5 max-md:flex-wrap">
             {docs.map((doc, i) => {
-              return <Card key={doc?.id || i} doc={doc} />;
+              return (
+                <Card key={doc?.id || i} doc={doc} refetchDocs={refetchDocs} />
+              );
             })}
           </div>
         </TBody>

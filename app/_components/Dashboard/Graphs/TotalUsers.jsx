@@ -82,7 +82,7 @@ function TotalUsers() {
     <div className="rounded-lg shadow-2xl bg-white flex flex-col p-4 m-5 flex-1">
       <div className="flex justify-between items-center">
         <div className="flex flex-col mt-3 mb-5 w-48 justify-start">
-          <h3 className="font-normal">Total System Users</h3>
+          <h3 className="font-normal">All Tasks</h3>
           <select
             name="Year"
             id=""

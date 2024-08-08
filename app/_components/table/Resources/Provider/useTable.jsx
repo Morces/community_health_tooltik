@@ -20,6 +20,8 @@ export default function useTable() {
 
   const [order, setOrder] = useState("id-desc");
 
+  const refetchDocs = () => getDocs({ page: page, limit: limit });
+
   useEffect(() => {
     getDocs({ page, limit });
   }, [limit, order, page]);
@@ -89,5 +91,6 @@ export default function useTable() {
     },
     setOrder,
     clearFilters,
+    refetchDocs,
   };
 }
