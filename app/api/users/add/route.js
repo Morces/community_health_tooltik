@@ -52,14 +52,15 @@ export async function POST(req) {
     });
 
     let mailOptions = {
-      from: "karanim594@gmail.com", 
-      to: "mwkazungu@gmail.com",
-      subject: "Test Email from Nodemailer and Gmail",
-      text: "Hello from Nodemailer using Gmail!",
-      html:
-        `
-        
-        `
+      from: "mwkazungu@gmail.com",
+      to: `${email}`,
+      subject: "LOGIN CREDENTIALS",
+      html: `
+          <p>Dear ${name},</p> 
+          <p>Please find your login details below:</p>,
+          <p>Email: ${email}</p>
+          <p>Password: ${password}</p>
+        `,
     };
 
     sendMail(mailOptions);

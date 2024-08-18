@@ -40,6 +40,7 @@
     "@uploadthing/react": "^6.7.2",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
+    "cht": "file:",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.2.0",
     "clsx": "^2.1.1",

@@ -1,25 +1,19 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 require("dotenv").config();
 
 // Create a SMTP transporter for gmail
 let transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: "mwkazungu@gmail.com",
     pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-// Email details (example)
-// let mailOptions = {
-//   from: "karanim594@gmail.com",
-//   to: "recipient@example.com",
-//   subject: "Test Email from Nodemailer and Gmail",
-//   text: "Hello from Nodemailer using Gmail!",
-// };
-
-const sendMail = (mailOptions) => {
-  transporter.sendMail(mailOptions, (error, info) => {
+const sendMail = async (mailOptions) => {
+  await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
     }
