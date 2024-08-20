@@ -60,8 +60,8 @@ export async function GET(req) {
     const result = convertBigIntToString(pagination);
 
     let mailOptions = {
-      from: "mwkazungu@gmail.com",
-      to: "karanim594@gmail.com",
+      from: "itsmunyasia@gmail.com",
+      to: "munyasiakazungu@gmail.com",
       subject: "Test Email from Nodemailer and Gmail",
       text: "Hello from Nodemailer using Gmail!",
     };

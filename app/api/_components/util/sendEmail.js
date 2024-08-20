@@ -4,10 +4,10 @@ require("dotenv").config();
 // Create a SMTP transporter for gmail
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
-    user: "mwkazungu@gmail.com",
+    user: "itsmunyasia@gmail.com",
     pass: process.env.EMAIL_PASSWORD,
   },
 });
@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport({
 const sendMail = async (mailOptions) => {
   await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log(error);
+      return console.log(error?.message);
     }
     console.log("Message sent: %s", info.messageId);
   });

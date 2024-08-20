@@ -52,14 +52,17 @@ export async function POST(req) {
     });
 
     let mailOptions = {
-      from: "mwkazungu@gmail.com",
+      from: "itsmunyasia@gmail.com",
       to: `${email}`,
       subject: "LOGIN CREDENTIALS",
+      // text: `Your login credentials are: \n Email: ${email} \n Password:`,
       html: `
           <p>Dear ${name},</p> 
           <p>Please find your login details below:</p>,
           <p>Email: ${email}</p>
           <p>Password: ${password}</p>
+          <p>Regards,</p>
+          <p>CHT Admin.</p>
         `,
     };
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../_components/prisma";
 import { convertBigIntToString } from "../../_components/util/convertBigint";
-import { parse } from "date-fns";
+import { formatISO, parse } from "date-fns";
 import sendMail from "../../_components/util/sendEmail";
 
 export async function PUT(req) {
@@ -14,11 +14,14 @@ export async function PUT(req) {
 
     if (allocated_to) data.allocated_to = parseInt(allocated_to);
 
+    const updatedAt = formatISO(new Date().now());
+
     const updatedTask = await prisma.tasks.update({
       where: { id: parseInt(id) },
       data: {
         ...data,
         task_status_id: parseInt(2),
+        updated_at: updatedAt,
       },
       include: {
         members_tasks_allocated_toTomembers: true,
@@ -26,7 +29,7 @@ export async function PUT(req) {
     });
 
     let mailOptions = {
-      from: "mwkazungu@gmail.com",
+      from: "itsmunyasia@gmail.com",
       to: `${updatedTask?.members_tasks_allocated_toTomembers?.email}`,
       subject: "Task Allocation",
       html: `
